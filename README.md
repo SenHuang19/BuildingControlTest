@@ -18,3 +18,24 @@ This repository contains prototype code for the Building Fault & CyberAttack Tes
 6) Shutdown a Docker with ``Ctrl+C`` to close port, and ``Ctrl+D`` to exit the Docker container.
 7) Remove the Docker container by ``$ docker rm jmodelica``.
 8) Remove the Docker image by ``$ make remove-image``.
+
+## Test Case RESTful API
+- To interact with a deployed test case, use the API defined in the table below by sending RESTful requests to: ``http://127.0.0.1:5000/<request>``
+
+Example RESTful interaction:
+
+- Receive a list of available measurement names and their metadata: ``$ curl http://127.0.0.1:5000/measurements``
+
+| Interaction                                                           | Request                                                   |
+|-----------------------------------------------------------------------|-----------------------------------------------------------|
+| Advance simulation with control input and receive measurements        |  POST ``advance`` with json data "{<input_name>:<value>}" |
+| Initialize simulation using a warmup period in seconds                |  PUT ``reset`` with arguments ``start_time=<value>``, ``end_time=<value>``|
+| Receive communication step in seconds                                 |  GET ``step``                                             |
+| Set communication step in seconds                                     |  PUT ``step`` with argument ``step=<value>``              |
+| Receive sensor signal names (y) and metadata                          |  GET ``measurements``                                     |
+| Receive control signals names (u) and metadata                        |  GET ``inputs``                                           |
+| Receive test result data                                              |  GET ``results``                                          |
+| Receive model key points (fault types, I/O)                           |  GET ``faults``                                           |
+| Receive detailed information for a given key point                    |  GET ``fault_info`` with argument ``fault=<point_name>``  |
+| Receive current scenario setting, including faults and I/O            |  GET ``fault_scenario``                                   |
+| Set test scenario  		                                            |  PUT ``fault_scenario`` with arguments regarding faults and I/O |
