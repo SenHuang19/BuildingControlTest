@@ -1,0 +1,174 @@
+{"floor1_ahu_dis": {
+"path":"floor1.duaFanAirHanUnit.cooCoil.coi.temLeaAir",
+"description":"sensor for the discharge air temperature in AHU 1",
+"type":"temp_sensor"},
+"floor2_ahu_dis": {
+"path":"floor2.duaFanAirHanUnit.cooCoil.coi.temLeaAir",
+"description":"sensor for the discharge air temperature in AHU 2",
+"type":"temp_sensor"},
+"floor3_ahu_dis": {
+"path":"floor3.duaFanAirHanUnit.cooCoil.coi.temLeaAir",
+"description":"sensor for the discharge air temperature in AHU 3",
+"type":"temp_sensor"},
+"floor1_vav1": {
+"path":"floor1.fivZonVAV.temZon[1]",
+"description":"sensor for the zone air temperature in zone1 of AHU 1",
+"type":"temp_sensor"},
+"floor1_vav2": {
+"path":"floor1.fivZonVAV.temZon[2]",
+"description":"sensor for the zone air temperature in zone2 of AHU 1",
+"type":"temp_sensor"},
+"floor1_vav3": {
+"path":"floor1.fivZonVAV.temZon[3]",
+"description":"sensor for the zone air temperature in zone3 of AHU 1",
+"type":"temp_sensor"},
+"floor1_vav4": {
+"path":"floor1.fivZonVAV.temZon[4]",
+"description":"sensor for the zone air temperature in zone4 of AHU 1",
+"type":"temp_sensor"},
+"floor1_vav5": {
+"path":"floor1.fivZonVAV.temZon[5]",
+"description":"sensor for the zone air temperature in zone5 of AHU 1",
+"type":"temp_sensor"},
+"floor2_vav1": {
+"path":"floor2.fivZonVAV.temZon[1]",
+"description":"sensor for the zone air temperature in zone1 of AHU 2",
+"type":"temp_sensor"},
+"floor2_vav2": {
+"path":"floor2.fivZonVAV.temZon[2]",
+"description":"sensor for the zone air temperature in zone2 of AHU 2",
+"type":"temp_sensor"},
+"floor2_vav3": {
+"path":"floor2.fivZonVAV.temZon[3]",
+"description":"sensor for the zone air temperature in zone3 of AHU 2",
+"type":"temp_sensor"},
+"floor2_vav4": {
+"path":"floor2.fivZonVAV.temZon[4]",
+"description":"sensor for the zone air temperature in zone4 of AHU 2",
+"type":"temp_sensor"},
+"floor2_vav5": {
+"path":"floor2.fivZonVAV.temZon[5]",
+"description":"sensor for the zone air temperature in zone5 of AHU 2",
+"type":"temp_sensor"},
+"floor3_vav1": {
+"path":"floor3.fivZonVAV.temZon[1]",
+"description":"sensor for the zone air temperature in zone1 of AHU 3",
+"type":"temp_sensor"},
+"floor3_vav2": {
+"path":"floor3.fivZonVAV.temZon[2]",
+"description":"sensor for the zone air temperature in zone2 of AHU 3",
+"type":"temp_sensor"},
+"floor3_vav3": {
+"path":"floor3.fivZonVAV.temZon[3]",
+"description":"sensor for the zone air temperature in zone3 of AHU 3",
+"type":"temp_sensor"},
+"floor3_vav4": {
+"path":"floor3.fivZonVAV.temZon[4]",
+"description":"sensor for the zone air temperature in zone4 of AHU 3",
+"type":"temp_sensor"},
+"floor3_vav5": {
+"path":"floor3.fivZonVAV.temZon[5]",
+"description":"sensor for the zone air temperature in zone5 of AHU 3",
+"type":"temp_sensor"},
+"floor1_ahu_mix": {
+"path":"floor1.duaFanAirHanUnit.mixingBox.mixBox.temMix",
+"description":"sensor for the mixed air temperature in AHU 1",
+"type":"temp_sensor"},
+"floor2_ahu_mix": {
+"path":"floor2.duaFanAirHanUnit.mixingBox.mixBox.temMix",
+"description":"sensor for the mixed air temperature in AHU 2",
+"type":"temp_sensor"},
+"floor3_ahu_mix": {
+"path":"floor3.duaFanAirHanUnit.mixingBox.mixBox.temMix",
+"description":"sensor for the mixed air temperature in AHU 3",
+"type":"temp_sensor"},
+"floor1_pre": {
+"path":"floor1.fivZonVAV.AirNetWor.senRelPre",
+"description":"sensor for the pressure sensor in AHU1",
+"type":"pressure_sensor"
+},
+"floor2_pre": {
+"path":"floor2.fivZonVAV.AirNetWor.senRelPre",
+"description":"sensor for the pressure sensor in AHU2",
+"type":"pressure_sensor"
+},
+"floor3_pre": {
+"path":"floor3.fivZonVAV.AirNetWor.senRelPre",
+"description":"sensor for the pressure sensor in AHU3",
+"type":"pressure_sensor"
+},
+"floor1_outdoor_damper":{
+"path":"floor1.duaFanAirHanUnit.mixingBox.mixBox.valFre",
+"description":"outdoor air damper in AHU1",
+"type":"valve"
+},
+"floor2_outdoor_damper":{
+"path":"floor2.duaFanAirHanUnit.mixingBox.mixBox.valFre",
+"description":"outdoor air damper in AHU2",
+"type":"valve"
+},
+"floor3_outdoor_damper":{
+"path":"floor3.duaFanAirHanUnit.mixingBox.mixBox.valFre",
+"description":"outdoor air damper in AHU3",
+"type":"valve"
+}, 
+"floor1_coil_valve":{
+"path":"floor1.duaFanAirHanUnit.cooCoil.val",
+"description":"coil valve in AHU1",
+"type":"valve"
+},
+"floor2_coil_valve":{
+"path":"floor2.duaFanAirHanUnit.cooCoil.val",
+"description":"coil valve in AHU2",
+"type":"valve"
+},
+"floor3_coil_valve":{
+"path":"floor3.duaFanAirHanUnit.cooCoil.val",
+"description":"coil valve in AHU3",
+"type":"valve"
+},
+"floor1_ahu_dis_pre_set": {
+"path":"floor1.duaFanAirHanUnit.supFan.variableSpeed.ovePreSetPoi",
+"description":"the static pressure setpoinit in AHU 1",
+"type":"input"
+},
+"floor2_ahu_dis_pre_set": {
+"path":"floor2.duaFanAirHanUnit.supFan.variableSpeed.ovePreSetPoi",
+"description":"the static pressure setpoinit in AHU 2",
+"type":"input"
+},
+"floor3_ahu_dis_pre_set": {
+"path":"floor3.duaFanAirHanUnit.supFan.variableSpeed.ovePreSetPoi",
+"description":"the static pressure setpoinit in AHU 3",
+"type":"input"
+},
+"floor1_ahu_supply_fan_power": {
+"path":"floor1.duaFanAirHanUnit.supFan.y",
+"description":"supply fan power in AHU 1",
+"type":"output"
+},
+"floor2_ahu_supply_fan_power": {
+"path":"floor2.duaFanAirHanUnit.supFan.y",
+"description":"supply fan power in AHU 2",
+"type":"output"
+},
+"floor3_ahu_supply_fan_power": {
+"path":"floor3.duaFanAirHanUnit.supFan.y",
+"description":"supply fan power in AHU 3",
+"type":"output"
+},
+"floor1_ahu_dis_T": {
+"path":"floor1.duaFanAirHanUnit.senTemDisAir.T",
+"description":"supply air temperature in AHU 3",
+"type":"output"
+},
+"floor2_ahu_dis_T": {
+"path":"floor2.duaFanAirHanUnit.senTemDisAir.T",
+"description":"supply air temperature in AHU 3",
+"type":"output"
+},
+"floor3_ahu_dis_T": {
+"path":"floor3.duaFanAirHanUnit.senTemDisAir.T",
+"description":"supply air temperature in AHU 3",
+"type":"output"
+}}

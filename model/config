@@ -1,0 +1,9 @@
+{
+	"name": "baseline",
+	"fmupath": "./AHU.fmu",
+	"config":"./fmu/config.json",
+	"model_info":"./fmu/fault.json",	
+	"model_template":"./fmu/model.mo",
+	"model_class":"AHU",
+	"step": 60
+}

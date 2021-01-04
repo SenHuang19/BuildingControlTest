@@ -1,0 +1,18 @@
+{"temp_sensor":{
+"string":"redeclare BuildingControlEmulator.Devices.Fault.TemSensorDev {}(dt={}, FauTime={})"
+},
+"pressure_sensor":{
+"string":"redeclare BuildingControlEmulator.Devices.Fault.PreSensorDev {}(dp={}, FauTime={})"
+},
+"valve":{
+"string":"redeclare BuildingControlEmulator.Devices.Fault.TwoWayLeak {}(y_leak={},FauTime={})"
+},
+"output":{
+"arg":"Modelica.Blocks.Interfaces.RealOutput {} = {};"
+},
+"input":{
+"string":"{}(uExt(y={}_u),activate(y={}_activate))",
+"arg":"Modelica.Blocks.Interfaces.RealInput {}_u;\n Modelica.Blocks.Interfaces.BooleanInput {}_activate;"
+}
+}
+
