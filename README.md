@@ -3,7 +3,7 @@
 This repository contains prototype code for the Building Fault & CyberAttack Test Framework
 
 ## Structure
-- ``/testcases`` contains model dependencies, model files and default configuration files
+- ``/model`` contains model dependencies, model files and default configuration files
 - ``/examples`` contains examples about how to use different Application Programming Interface (APIs)
 
 ## Quick-Start to Run Test Cases
@@ -22,7 +22,7 @@ This repository contains prototype code for the Building Fault & CyberAttack Tes
 ## Test Case RESTful API
 - To interact with a deployed test case, use the API defined in the table below by sending RESTful requests to: ``http://127.0.0.1:5000/<request>``
 
-Example RESTful interaction:
+  Example RESTful interaction:
 
 - Receive a list of available measurement names and their metadata: ``$ curl http://127.0.0.1:5000/measurements``
 
@@ -39,3 +39,18 @@ Example RESTful interaction:
 | Receive detailed information for a given key point                    |  GET ``fault_info`` with argument ``fault=<point_name>``  |
 | Receive current scenario setting, including faults and I/O            |  GET ``fault_scenario``                                   |
 | Set test scenario  		                                            |  PUT ``fault_scenario`` with arguments regarding faults and I/O |
+
+## Key Points 
+
+The key points for the testing AFDD model (AHU) is discussed in ``/model/fmu/fault.json``.
+Those points can be categorized in three groups and have three properties: ``path``, ``description``, and ``type``. 
+The ``path`` defines the location of the corresponding fault in the studied model.
+The ``description`` defines the location of the corresponding fault in the system that the studied model represent.
+The ``type`` defines the type of this key point. 
+Types of key points are defined in ``/model/fmu/config.json`` and are independent of AFDD models.  
+
+## Fault Scenario
+
+The fault scenario defines the faults, the inputs, and the outputs for a simulation run.
+The fault points are defined as ``<point_name>:{value:<value of fault intensive parameter>,fault_time:<time when the fault occurs>}``.
+The input/output points are defined as ``<point_name>:{name:<name of the input and output>}``.
