@@ -92,17 +92,18 @@ def path2modifer(keys,info,config):
     '''   
     modifier = ''
     for key in keys.keys():
+       print keys[key]
        if keys[key] is not None:
-          print keys[key]
-          temp_dict = ast.literal_eval(keys[key])
+          if not isinstance(keys[key],dict):
+               keys[key] = ast.literal_eval(keys[key])
           path = info[key]['path']   
           fault_type = info[key]['type']
           args=path.split('.')
           temp =''          
           if fault_type.find('output')==-1 and fault_type.find('input')==-1:            
-             temp = config[fault_type]['string'].format(args[-1],temp_dict['value'],temp_dict['fault_time'])  
+             temp = config[fault_type]['string'].format(args[-1],keys[key]['value'],keys[key]['fault_time'])  
           elif fault_type.find('input')!=-1:
-             temp = config[fault_type]['string'].format(args[-1],temp_dict['name'],temp_dict['name'])   
+             temp = config[fault_type]['string'].format(args[-1],keys[key]['name'],keys[key]['name'])   
           if temp != '':             
               for i in range(len(args)-2,-1,-1):   
                   temp =  args[i]+'('+temp+')'
@@ -133,15 +134,16 @@ def path2IO(keys,info,config):
     IO = ''
     for key in keys.keys():
        if keys[key] is not None:
-          temp_dict = ast.literal_eval(keys[key])
+          if not isinstance(keys[key],dict):
+               keys[key] = ast.literal_eval(keys[key])
           path = info[key]['path']   
           fault_type = info[key]['type']
           args=path.split('.') 
           temp =''           
           if fault_type.find('output')!=-1 : 
-             temp = config[fault_type]['arg'].format(temp_dict['name'],path)   
+             temp = config[fault_type]['arg'].format(keys[key]['name'],path)   
           elif fault_type.find('input')!=-1: 
-             temp = config[fault_type]['arg'].format(temp_dict['name'],temp_dict['name'])  
+             temp = config[fault_type]['arg'].format(keys[key]['name'],keys[key]['name'])  
           if temp != '':              
                IO = IO + temp +'\n'        
     return IO    
@@ -171,6 +173,11 @@ class TestCase(object):
             self.fault_scenario = self.con['fault_scenario']
         else:
             self.fault_scenario = {} 
+            for key in self.info:
+                if self.info[key]['type'] =='output':
+                       self.fault_scenario[key]={'name':key}
+#            self.fault_scenario = json.dumps(self.fault_scenario)
+#        print self.fault_scenario   
         self.model_class = self.con['model_class']            
         self.model_template = templateEnv.get_template(con['model_template'])        
         modifer = path2modifer(self.fault_scenario,self.info,self.config)        

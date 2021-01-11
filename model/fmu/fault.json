@@ -143,32 +143,348 @@
 "type":"input"
 },
 "floor1_ahu_supply_fan_power": {
-"path":"floor1.duaFanAirHanUnit.supFan.y",
+"path":"floor1.duaFanAirHanUnit.supFan.P",
 "description":"supply fan power in AHU 1",
 "type":"output"
 },
 "floor2_ahu_supply_fan_power": {
-"path":"floor2.duaFanAirHanUnit.supFan.y",
+"path":"floor2.duaFanAirHanUnit.supFan.P",
 "description":"supply fan power in AHU 2",
 "type":"output"
 },
 "floor3_ahu_supply_fan_power": {
-"path":"floor3.duaFanAirHanUnit.supFan.y",
+"path":"floor3.duaFanAirHanUnit.supFan.P",
 "description":"supply fan power in AHU 3",
+"type":"output"
+},
+"floor1_ahu_return_fan_power": {
+"path":"floor1.duaFanAirHanUnit.retFan.P",
+"description":"return fan power in AHU 1",
+"type":"output"
+},
+"floor2_ahu_return_fan_power": {
+"path":"floor2.duaFanAirHanUnit.retFan.P",
+"description":"return fan power in AHU 2",
+"type":"output"
+},
+"floor3_ahu_return_fan_power": {
+"path":"floor3.duaFanAirHanUnit.retFan.P",
+"description":"return fan power in AHU 3",
 "type":"output"
 },
 "floor1_ahu_dis_T": {
 "path":"floor1.duaFanAirHanUnit.senTemDisAir.T",
-"description":"supply air temperature in AHU 3",
+"description":"supply air temperature in AHU 1",
 "type":"output"
 },
 "floor2_ahu_dis_T": {
 "path":"floor2.duaFanAirHanUnit.senTemDisAir.T",
-"description":"supply air temperature in AHU 3",
+"description":"supply air temperature in AHU 2",
 "type":"output"
 },
 "floor3_ahu_dis_T": {
 "path":"floor3.duaFanAirHanUnit.senTemDisAir.T",
 "description":"supply air temperature in AHU 3",
 "type":"output"
-}}
+},
+"floor1_ahu_dis_mflow": {
+"path":"floor1.duaFanAirHanUnit.supFan.masFloRat.m_flow",
+"description":"supply air mass flowrate in AHU 1",
+"type":"output"
+},
+"floor2_ahu_dis_mflow": {
+"path":"floor2.duaFanAirHanUnit.supFan.masFloRat.m_flow",
+"description":"supply air mass flowrate in AHU 2",
+"type":"output"
+},
+"floor3_ahu_dis_mflow": {
+"path":"floor3.duaFanAirHanUnit.supFan.masFloRat.m_flow",
+"description":"supply air mass flowrate in AHU 3",
+"type":"output"
+},
+"floor1_ahu_coil_val_pos": {
+"path":"floor1.duaFanAirHanUnit.cooCoil.val.y",
+"description":"valve position of AHU 1",
+"type":"output"
+},
+"floor2_ahu_coil_val_pos": {
+"path":"floor2.duaFanAirHanUnit.cooCoil.val.y",
+"description":"valve position of AHU 1",
+"type":"output"
+},
+"floor3_ahu_coil_val_pos": {
+"path":"floor3.duaFanAirHanUnit.cooCoil.val.y",
+"description":"valve position of AHU 1",
+"type":"output"
+},
+"floor1_ahu_fre_damper_pos": {
+"path":"floor1.duaFanAirHanUnit.mixingBox.mixBox.valFre.y",
+"description":"outdoor air damper position of AHU 1",
+"type":"output"
+},
+"floor2_ahu_fre_damper_pos": {
+"path":"floor2.duaFanAirHanUnit.mixingBox.mixBox.valFre.y",
+"description":"outdoor air damper position of AHU 2",
+"type":"output"
+},
+"floor3_ahu_fre_damper_pos": {
+"path":"floor3.duaFanAirHanUnit.mixingBox.mixBox.valFre.y",
+"description":"outdoor air damper position of AHU 3",
+"type":"output"
+},
+"floor1_ahu_mix_T": {
+"path":"floor1.duaFanAirHanUnit.mixingBox.mixBox.temMix.T",
+"description":"mixing air temperature in AHU 1",
+"type":"output"
+},
+"floor2_ahu_mix_T": {
+"path":"floor2.duaFanAirHanUnit.mixingBox.mixBox.temMix.T",
+"description":"mixing air temperature in AHU 2",
+"type":"output"
+},
+"floor3_ahu_mix_T": {
+"path":"floor3.duaFanAirHanUnit.mixingBox.mixBox.temMix.T",
+"description":"mixing air temperature in AHU 3",
+"type":"output"
+},
+"floor1_ahu_fre_mflow": {
+"path":"floor1.duaFanAirHanUnit.mixingBox.mixBox.masFloAir.m_flow",
+"description":"fresh air mass flowrate in AHU 1",
+"type":"output"
+},
+"floor2_ahu_fre_mflow": {
+"path":"floor2.duaFanAirHanUnit.mixingBox.mixBox.masFloAir.m_flow",
+"description":"fresh air mass flowrate in AHU 2",
+"type":"output"
+},
+"floor3_ahu_fre_mflow": {
+"path":"floor3.duaFanAirHanUnit.mixingBox.mixBox.masFloAir.m_flow",
+"description":"fresh air mass flowrate in AHU 3",
+"type":"output"
+},
+"floor1_vav1_dis_mflow": {
+"path":"floor1.fivZonVAV.vAV[1].masFloRat.m_flow",
+"description":"supply air mass flowrate of zone 1 served by AHU 1",
+"type":"output"
+},
+"floor1_vav2_dis_mflow": {
+"path":"floor1.fivZonVAV.vAV[2].masFloRat.m_flow",
+"description":"supply air mass flowrate of zone 2 served by AHU 1",
+"type":"output"
+},
+"floor1_vav3_dis_mflow": {
+"path":"floor1.fivZonVAV.vAV[3].masFloRat.m_flow",
+"description":"supply air mass flowrate of zone 3 served by AHU 1",
+"type":"output"
+},
+"floor1_vav4_dis_mflow": {
+"path":"floor1.fivZonVAV.vAV[4].masFloRat.m_flow",
+"description":"supply air mass flowrate of zone 4 served by AHU 1",
+"type":"output"
+},
+"floor1_vav5_dis_mflow": {
+"path":"floor1.fivZonVAV.vAV[5].masFloRat.m_flow",
+"description":"supply air mass flowrate of zone 5 served by AHU 1",
+"type":"output"
+},
+"floor2_vav1_dis_mflow": {
+"path":"floor2.fivZonVAV.vAV[1].masFloRat.m_flow",
+"description":"supply air mass flowrate of zone 1 served by AHU 2",
+"type":"output"
+},
+"floor2_vav2_dis_mflow": {
+"path":"floor2.fivZonVAV.vAV[2].masFloRat.m_flow",
+"description":"supply air mass flowrate of zone 2 served by AHU 2",
+"type":"output"
+},
+"floor2_vav3_dis_mflow": {
+"path":"floor2.fivZonVAV.vAV[3].masFloRat.m_flow",
+"description":"supply air mass flowrate of zone 3 served by AHU 2",
+"type":"output"
+},
+"floor2_vav4_dis_mflow": {
+"path":"floor2.fivZonVAV.vAV[4].masFloRat.m_flow",
+"description":"supply air mass flowrate of zone 4 served by AHU 2",
+"type":"output"
+},
+"floor2_vav5_dis_mflow": {
+"path":"floor2.fivZonVAV.vAV[5].masFloRat.m_flow",
+"description":"supply air mass flowrate of zone 5 served by AHU 2",
+"type":"output"
+},
+"floor3_vav1_dis_mflow": {
+"path":"floor3.fivZonVAV.vAV[1].masFloRat.m_flow",
+"description":"supply air mass flowrate of zone 1 served by AHU 3",
+"type":"output"
+},
+"floor3_vav2_dis_mflow": {
+"path":"floor3.fivZonVAV.vAV[2].masFloRat.m_flow",
+"description":"supply air mass flowrate of zone 2 served by AHU 3",
+"type":"output"
+},
+"floor3_vav3_dis_mflow": {
+"path":"floor3.fivZonVAV.vAV[3].masFloRat.m_flow",
+"description":"supply air mass flowrate of zone 3 served by AHU 3",
+"type":"output"
+},
+"floor3_vav4_dis_mflow": {
+"path":"floor3.fivZonVAV.vAV[4].masFloRat.m_flow",
+"description":"supply air mass flowrate of zone 4 served by AHU 3",
+"type":"output"
+},
+"floor3_vav5_dis_mflow": {
+"path":"floor3.fivZonVAV.vAV[5].masFloRat.m_flow",
+"description":"supply air mass flowrate of zone 5 served by AHU 3",
+"type":"output"
+},
+"floor1_vav1_dis_T": {
+"path":"floor1.fivZonVAV.vAV[1].temLea.T",
+"description":"supply air temperature of zone 1 served by AHU 1",
+"type":"output"
+},
+"floor1_vav2_dis_T": {
+"path":"floor1.fivZonVAV.vAV[2].temLea.T",
+"description":"supply air temperature of zone 2 served by AHU 1",
+"type":"output"
+},
+"floor1_vav3_dis_T": {
+"path":"floor1.fivZonVAV.vAV[3].temLea.T",
+"description":"supply air temperature of zone 3 served by AHU 1",
+"type":"output"
+},
+"floor1_vav4_dis_T": {
+"path":"floor1.fivZonVAV.vAV[4].temLea.T",
+"description":"supply air temperature of zone 4 served by AHU 1",
+"type":"output"
+},
+"floor1_vav5_dis_T": {
+"path":"floor1.fivZonVAV.vAV[5].temLea.T",
+"description":"supply air temperature of zone 5 served by AHU 1",
+"type":"output"
+},
+"floor2_vav1_dis_T": {
+"path":"floor2.fivZonVAV.vAV[1].temLea.T",
+"description":"supply air temperature of zone 1 served by AHU 2",
+"type":"output"
+},
+"floor2_vav2_dis_T": {
+"path":"floor2.fivZonVAV.vAV[2].temLea.T",
+"description":"supply air temperature of zone 2 served by AHU 2",
+"type":"output"
+},
+"floor2_vav3_dis_T": {
+"path":"floor2.fivZonVAV.vAV[3].temLea.T",
+"description":"supply air temperature of zone 3 served by AHU 2",
+"type":"output"
+},
+"floor2_vav4_dis_T": {
+"path":"floor2.fivZonVAV.vAV[4].temLea.T",
+"description":"supply air temperature of zone 4 served by AHU 2",
+"type":"output"
+},
+"floor2_vav5_dis_T": {
+"path":"floor2.fivZonVAV.vAV[5].temLea.T",
+"description":"supply air temperature of zone 5 served by AHU 2",
+"type":"output"
+},
+"floor3_vav1_dis_T": {
+"path":"floor3.fivZonVAV.vAV[1].temLea.T",
+"description":"supply air temperature of zone 1 served by AHU 3",
+"type":"output"
+},
+"floor3_vav2_dis_T": {
+"path":"floor3.fivZonVAV.vAV[2].temLea.T",
+"description":"supply air temperature of zone 2 served by AHU 3",
+"type":"output"
+},
+"floor3_vav3_dis_T": {
+"path":"floor3.fivZonVAV.vAV[3].temLea.T",
+"description":"supply air temperature of zone 3 served by AHU 3",
+"type":"output"
+},
+"floor3_vav4_dis_T": {
+"path":"floor3.fivZonVAV.vAV[4].temLea.T",
+"description":"supply air temperature of zone 4 served by AHU 3",
+"type":"output"
+},
+"floor3_vav5_dis_T": {
+"path":"floor3.fivZonVAV.vAV[5].temLea.T",
+"description":"supply air temperature of zone 5 served by AHU 3",
+"type":"output"
+},
+"floor1_vav1_rehea_val_pos": {
+"path":"floor1.fivZonVAV.vAV[1].ReheaVal.y",
+"description":"reheat valve position of zone 1 served by AHU 1",
+"type":"output"
+},
+"floor1_vav2_rehea_val_pos": {
+"path":"floor1.fivZonVAV.vAV[2].ReheaVal.y",
+"description":"reheat valve position of zone 2 served by AHU 1",
+"type":"output"
+},
+"floor1_vav3_rehea_val_pos": {
+"path":"floor1.fivZonVAV.vAV[3].ReheaVal.y",
+"description":"reheat valve position of zone 3 served by AHU 1",
+"type":"output"
+},
+"floor1_vav4_rehea_val_pos": {
+"path":"floor1.fivZonVAV.vAV[4].ReheaVal.y",
+"description":"reheat valve position of zone 4 served by AHU 1",
+"type":"output"
+},
+"floor1_vav5_rehea_val_pos": {
+"path":"floor1.fivZonVAV.vAV[5].ReheaVal.y",
+"description":"reheat valve position of zone 5 served by AHU 1",
+"type":"output"
+},
+"floor2_vav1_rehea_val_pos": {
+"path":"floor2.fivZonVAV.vAV[1].ReheaVal.y",
+"description":"reheat valve position of zone 1 served by AHU 2",
+"type":"output"
+},
+"floor2_vav2_rehea_val_pos": {
+"path":"floor2.fivZonVAV.vAV[2].ReheaVal.y",
+"description":"reheat valve position of zone 2 served by AHU 2",
+"type":"output"
+},
+"floor2_vav3_rehea_val_pos": {
+"path":"floor2.fivZonVAV.vAV[3].ReheaVal.y",
+"description":"reheat valve position of zone 3 served by AHU 2",
+"type":"output"
+},
+"floor2_vav4_rehea_val_pos": {
+"path":"floor2.fivZonVAV.vAV[4].ReheaVal.y",
+"description":"reheat valve position of zone 4 served by AHU 2",
+"type":"output"
+},
+"floor2_vav5_rehea_val_pos": {
+"path":"floor2.fivZonVAV.vAV[5].ReheaVal.y",
+"description":"reheat valve position of zone 5 served by AHU 2",
+"type":"output"
+},
+"floor3_vav1_rehea_val_pos": {
+"path":"floor3.fivZonVAV.vAV[1].ReheaVal.y",
+"description":"reheat valve position of zone 1 served by AHU 3",
+"type":"output"
+},
+"floor3_vav2_rehea_val_pos": {
+"path":"floor3.fivZonVAV.vAV[2].ReheaVal.y",
+"description":"reheat valve position of zone 2 served by AHU 3",
+"type":"output"
+},
+"floor3_vav3_rehea_val_pos": {
+"path":"floor3.fivZonVAV.vAV[3].ReheaVal.y",
+"description":"reheat valve position of zone 3 served by AHU 3",
+"type":"output"
+},
+"floor3_vav4_rehea_val_pos": {
+"path":"floor3.fivZonVAV.vAV[4].ReheaVal.y",
+"description":"reheat valve position of zone 4 served by AHU 3",
+"type":"output"
+},
+"floor3_vav5_rehea_val_pos": {
+"path":"floor3.fivZonVAV.vAV[5].ReheaVal.y",
+"description":"reheat valve position of zone 5 served by AHU 3",
+"type":"output"
+}
+}
