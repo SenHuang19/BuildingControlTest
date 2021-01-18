@@ -486,5 +486,20 @@
 "path":"floor3.fivZonVAV.vAV[5].ReheaVal.y",
 "description":"reheat valve position of zone 5 served by AHU 3",
 "type":"output"
+},
+"floor3_vav5_rehea_val_pos": {
+"path":"floor3.fivZonVAV.vAV[5].ReheaVal.y",
+"description":"reheat valve position of zone 5 served by AHU 3",
+"type":"output"
+},
+"floor2_vav1_heating_set": {
+"path":"floor2.ZonHeaTempSetPoi[1]",
+"description":"heating setpoint of zone 1 served by AHU 2",
+"type":"output"
+},
+"floor2_vav1_cooling_set": {
+"path":"floor2.ZonCooTempSetPoi[1]",
+"description":"cooling setpoint of zone 1 served by AHU 2",
+"type":"output"
 }
 }
