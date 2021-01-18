@@ -44,10 +44,10 @@ class Reset(Resource):
     def put(self):
         """PUT request to reset the test."""
         u = self.parser_reset.parse_args()
-        y = self.case.initialize(float(u['end_time']),float(u['end_time'])-float(u['start_time']))
+        y = self.case.initialize(float(u['start_time']),float(u['end_time'])-float(u['start_time']))
         return y
 
-                
+               
 class Step(Resource):
     """Interface to test case simulation step size."""
 

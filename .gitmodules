@@ -4,3 +4,6 @@
 [submodule "model/library/AFDD"]
 	path = model/library/AFDD
 	url = https://github.com/SenHuang19/AFDD
+[submodule "eplus"]
+	path = eplus
+	url = https://github.com/SenHuang19/eplus
