@@ -492,14 +492,164 @@
 "description":"reheat valve position of zone 5 served by AHU 3",
 "type":"output"
 },
+"floor1_vav1_heating_set": {
+"path":"floor1.ZonHeaTempSetPoi[1]",
+"description":"heating setpoint of zone 1 served by AHU 1",
+"type":"output"
+},
+"floor1_vav2_heating_set": {
+"path":"floor1.ZonHeaTempSetPoi[2]",
+"description":"heating setpoint of zone 2 served by AHU 1",
+"type":"output"
+},
+"floor1_vav3_heating_set": {
+"path":"floor1.ZonHeaTempSetPoi[3]",
+"description":"heating setpoint of zone 3 served by AHU 1",
+"type":"output"
+},
+"floor1_vav4_heating_set": {
+"path":"floor1.ZonHeaTempSetPoi[4]",
+"description":"heating setpoint of zone 4 served by AHU 1",
+"type":"output"
+},
+"floor1_vav5_heating_set": {
+"path":"floor1.ZonHeaTempSetPoi[5]",
+"description":"heating setpoint of zone 5 served by AHU 1",
+"type":"output"
+},
 "floor2_vav1_heating_set": {
 "path":"floor2.ZonHeaTempSetPoi[1]",
 "description":"heating setpoint of zone 1 served by AHU 2",
 "type":"output"
 },
+"floor2_vav2_heating_set": {
+"path":"floor2.ZonHeaTempSetPoi[2]",
+"description":"heating setpoint of zone 2 served by AHU 2",
+"type":"output"
+},
+"floor2_vav3_heating_set": {
+"path":"floor2.ZonHeaTempSetPoi[3]",
+"description":"heating setpoint of zone 3 served by AHU 2",
+"type":"output"
+},
+"floor2_vav4_heating_set": {
+"path":"floor2.ZonHeaTempSetPoi[4]",
+"description":"heating setpoint of zone 4 served by AHU 2",
+"type":"output"
+},
+"floor2_vav5_heating_set": {
+"path":"floor2.ZonHeaTempSetPoi[5]",
+"description":"heating setpoint of zone 5 served by AHU 2",
+"type":"output"
+},
+"floor3_vav1_heating_set": {
+"path":"floor3.ZonHeaTempSetPoi[1]",
+"description":"heating setpoint of zone 1 served by AHU 3",
+"type":"output"
+},
+"floor3_vav2_heating_set": {
+"path":"floor3.ZonHeaTempSetPoi[2]",
+"description":"heating setpoint of zone 2 served by AHU 3",
+"type":"output"
+},
+"floor3_vav3_heating_set": {
+"path":"floor3.ZonHeaTempSetPoi[3]",
+"description":"heating setpoint of zone 3 served by AHU 3",
+"type":"output"
+},
+"floor3_vav4_heating_set": {
+"path":"floor3.ZonHeaTempSetPoi[4]",
+"description":"heating setpoint of zone 4 served by AHU 3",
+"type":"output"
+},
+"floor3_vav5_heating_set": {
+"path":"floor3.ZonHeaTempSetPoi[5]",
+"description":"heating setpoint of zone 5 served by AHU 3",
+"type":"output"
+},
+"floor1_vav1_cooling_set": {
+"path":"floor1.ZonCooTempSetPoi[1]",
+"description":"cooling setpoint of zone 1 served by AHU 1",
+"type":"output"
+},
+"floor1_vav2_cooling_set": {
+"path":"floor1.ZonCooTempSetPoi[2]",
+"description":"cooling setpoint of zone 2 served by AHU 1",
+"type":"output"
+},
+"floor1_vav3_cooling_set": {
+"path":"floor1.ZonCooTempSetPoi[3]",
+"description":"cooling setpoint of zone 3 served by AHU 1",
+"type":"output"
+},
+"floor1_vav4_cooling_set": {
+"path":"floor1.ZonCooTempSetPoi[4]",
+"description":"cooling setpoint of zone 4 served by AHU 1",
+"type":"output"
+},
+"floor1_vav5_cooling_set": {
+"path":"floor1.ZonCooTempSetPoi[5]",
+"description":"cooling setpoint of zone 5 served by AHU 1",
+"type":"output"
+},
 "floor2_vav1_cooling_set": {
 "path":"floor2.ZonCooTempSetPoi[1]",
 "description":"cooling setpoint of zone 1 served by AHU 2",
+"type":"output"
+},
+"floor2_vav2_cooling_set": {
+"path":"floor2.ZonCooTempSetPoi[2]",
+"description":"cooling setpoint of zone 2 served by AHU 2",
+"type":"output"
+},
+"floor2_vav3_cooling_set": {
+"path":"floor2.ZonCooTempSetPoi[3]",
+"description":"cooling setpoint of zone 3 served by AHU 2",
+"type":"output"
+},
+"floor2_vav4_cooling_set": {
+"path":"floor2.ZonCooTempSetPoi[4]",
+"description":"cooling setpoint of zone 4 served by AHU 2",
+"type":"output"
+},
+"floor2_vav5_cooling_set": {
+"path":"floor2.ZonCooTempSetPoi[5]",
+"description":"cooling setpoint of zone 5 served by AHU 2",
+"type":"output"
+},
+"floor3_vav1_cooling_set": {
+"path":"floor3.ZonCooTempSetPoi[1]",
+"description":"cooling setpoint of zone 1 served by AHU 3",
+"type":"output"
+},
+"floor3_vav2_cooling_set": {
+"path":"floor3.ZonCooTempSetPoi[2]",
+"description":"cooling setpoint of zone 2 served by AHU 3",
+"type":"output"
+},
+"floor3_vav3_cooling_set": {
+"path":"floor3.ZonCooTempSetPoi[3]",
+"description":"cooling setpoint of zone 3 served by AHU 3",
+"type":"output"
+},
+"floor3_vav4_cooling_set": {
+"path":"floor3.ZonCooTempSetPoi[4]",
+"description":"cooling setpoint of zone 4 served by AHU 3",
+"type":"output"
+},
+"floor3_vav5_cooling_set": {
+"path":"floor3.ZonCooTempSetPoi[5]",
+"description":"cooling setpoint of zone 5 served by AHU 3",
+"type":"output"
+},
+"outdoor_air_temp": {
+"path":"TDryBul",
+"description":"outdoor air temperature",
+"type":"output"
+},
+"occ": {
+"path":"Occ",
+"description":"occupancy status",
 "type":"output"
 }
 }
