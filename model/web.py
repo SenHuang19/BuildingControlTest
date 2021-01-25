@@ -7,7 +7,7 @@ The API is implemented using the ``flask`` package.
 
 # GENERAL PACKAGE IMPORT
 # ----------------------
-from flask import Flask
+from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
 import json
 # ----------------------

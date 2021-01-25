@@ -92,7 +92,7 @@ def path2modifer(keys,info,config):
     '''   
     modifier = ''
     for key in keys.keys():
-       print keys[key]
+       # print keys[key]
        if keys[key] is not None:
           if not isinstance(keys[key],dict):
                keys[key] = ast.literal_eval(keys[key])
@@ -169,22 +169,23 @@ class TestCase(object):
         self.info = json.loads(data)       
    
                 
-        if 'fault_scenario' in con:
-            self.fault_scenario = self.con['fault_scenario']
+        if 'scenario' in con:
+            self.scenario = self.con['scenario']
         else:
-            self.fault_scenario = {} 
+            self.scenario = {} 
+            self.outputs = {} 
             for key in self.info:
-                if self.info[key]['type'] =='output':
-                       self.fault_scenario[key]={'name':key}
-#            self.fault_scenario = json.dumps(self.fault_scenario)
-#        print self.fault_scenario   
+                if self.info[key]['type'] !='output':
+                       self.scenario[key]={'name':key}
+                else:
+                       self.outputs[key]={'name':key}                
         self.model_class = self.con['model_class']            
         self.model_template = templateEnv.get_template(con['model_template'])        
-        modifer = path2modifer(self.fault_scenario,self.info,self.config)        
+        modifer = path2modifer(self.scenario,self.info,self.config)        
         with open('./inner1','w') as f: 
                 f.write(modifer) 
                                
-        IO = path2IO(self.fault_scenario,self.info,self.config)                    
+        IO = path2IO(self.scenario.update(self.outputs),self.info,self.config)                    
         with open('./inner2','w') as f: 
                 f.write(IO)                 
                 
@@ -531,7 +532,7 @@ class TestCase(object):
             fault_info = self.info[fault]                          
         return fault_info
 
-    def get_fault_scenario(self):
+    def get_scenario(self):
         '''Returns the name of the test case fmu.
         
         Parameters
@@ -540,23 +541,23 @@ class TestCase(object):
         
         Returns
         -------
-        fault_scenario : dict
+        scenario : dict
             Dict that describes the current fault condition.
             
         ''' 
         dict = {}
-        for key in self.fault_scenario.keys():
-            if self.fault_scenario[key]:
-                 dict[key] = self.fault_scenario[key]
+        for key in self.scenario.keys():
+            if self.scenario[key]:
+                 dict[key] = self.scenario[key]
         
         return dict           
 
-    def set_fault_scenario(self,fault_scenario):
+    def set_scenario(self,scenario):
         '''Returns the name of the test case fmu.
         
         Parameters
         ----------
-        fault_scenario : dict
+        scenario : dict
             Dict that describes the current fault condition.
         
         Returns
@@ -564,6 +565,6 @@ class TestCase(object):
         None
             
         '''        
-        self.con['fault_scenario'] = fault_scenario        
+        self.con['scenario'] = scenario        
         self.__init__(self.con)
         return None          
