@@ -657,83 +657,78 @@
 "description":"occupancy status signal",
 "type":"output"
 },
-"occ": {
-"path":"realToBoolean.y",
-"description":"actual occupancy status",
-"type":"output"
-},
 "floor1_vav1_damper_pos": {
-"path":"floor1.fivZonVAV[1].vAV.Dam.y_actual",
+"path":"floor1.fivZonVAV.vAV[1].Dam.y_actual",
 "description":"damper position of zone 1 served by AHU 1",
 "type":"output"
 },
 "floor1_vav2_damper_pos": {
-"path":"floor1.fivZonVAV[2].vAV.Dam.y_actual",
+"path":"floor1.fivZonVAV.vAV[2].Dam.y_actual",
 "description":"damper position of zone 2 served by AHU 1",
 "type":"output"
 },
 "floor1_vav3_damper_pos": {
-"path":"floor1.fivZonVAV[3].vAV.Dam.y_actual",
+"path":"floor1.fivZonVAV.vAV[3].Dam.y_actual",
 "description":"damper position of zone 3 served by AHU 1",
 "type":"output"
 },
 "floor1_vav4_damper_pos": {
-"path":"floor1.fivZonVAV[4].vAV.Dam.y_actual",
+"path":"floor1.fivZonVAV.vAV[4].Dam.y_actual",
 "description":"damper position of zone 4 served by AHU 1",
 "type":"output"
 },
 "floor1_vav5_damper_pos": {
-"path":"floor1.fivZonVAV[5].vAV.Dam.y_actual",
+"path":"floor1.fivZonVAV.vAV[5].Dam.y_actual",
 "description":"damper position of zone 5 served by AHU 1",
 "type":"output"
 },
 "floor2_vav1_damper_pos": {
-"path":"floor2.fivZonVAV[1].vAV.Dam.y_actual",
+"path":"floor2.fivZonVAV.vAV[1].Dam.y_actual",
 "description":"damper position of zone 1 served by AHU 2",
 "type":"output"
 },
 "floor2_vav2_damper_pos": {
-"path":"floor2.fivZonVAV[2].vAV.Dam.y_actual",
+"path":"floor2.fivZonVAV.vAV[2].Dam.y_actual",
 "description":"damper position of zone 2 served by AHU 2",
 "type":"output"
 },
 "floor2_vav3_damper_pos": {
-"path":"floor2.fivZonVAV[3].vAV.Dam.y_actual",
+"path":"floor2.fivZonVAV.vAV[3].Dam.y_actual",
 "description":"damper position of zone 3 served by AHU 2",
 "type":"output"
 },
 "floor2_vav4_damper_pos": {
-"path":"floor2.fivZonVAV[4].vAV.Dam.y_actual",
+"path":"floor2.fivZonVAV.vAV[4].Dam.y_actual",
 "description":"damper position of zone 4 served by AHU 2",
 "type":"output"
 },
 "floor2_vav5_damper_pos": {
-"path":"floor2.fivZonVAV[5].vAV.Dam.y_actual",
+"path":"floor2.fivZonVAV.vAV[5].Dam.y_actual",
 "description":"damper position of zone 5 served by AHU 2",
 "type":"output"
 },
 "floor3_vav1_damper_pos": {
-"path":"floor3.fivZonVAV[1].vAV.Dam.y_actual",
+"path":"floor3.fivZonVAV.vAV[1].Dam.y_actual",
 "description":"damper position of zone 1 served by AHU 3",
 "type":"output"
 },
 "floor3_vav2_damper_pos": {
-"path":"floor3.fivZonVAV[2].vAV.Dam.y_actual",
+"path":"floor3.fivZonVAV.vAV[2].Dam.y_actual",
 "description":"damper position of zone 2 served by AHU 3",
 "type":"output"
 },
 "floor3_vav3_damper_pos": {
-"path":"floor3.fivZonVAV[3].vAV.Dam.y_actual",
+"path":"floor3.fivZonVAV.vAV[3].Dam.y_actual",
 "description":"damper position of zone 3 served by AHU 3",
 "type":"output"
 },
 "floor3_vav4_damper_pos": {
-"path":"floor3.fivZonVAV[4].vAV.Dam.y_actual",
+"path":"floor3.fivZonVAV.vAV[4].Dam.y_actual",
 "description":"damper position of zone 4 served by AHU 3",
 "type":"output"
 },
 "floor3_vav5_damper_pos": {
-"path":"floor3.fivZonVAV[5].vAV.Dam.y_actual",
+"path":"floor3.fivZonVAV.vAV[5].Dam.y_actual",
 "description":"damper position of zone 5 served by AHU 3",
 "type":"output"
 },
