@@ -142,9 +142,19 @@
 "description":"the static pressure setpoinit in AHU 3",
 "type":"input"
 },
-"floor1_vav1_coolingsetpoint": {
-"path":"zonCon[1].oveTCooSet",
-"description":"the cooling temperature setpoint of of zone 1 served by AHU 3",
+"floor1_ahu_dis_temp_set": {
+"path":"oveTDisAir[1]",
+"description":"the discharge air temperature setpoinit in AHU 1",
+"type":"input"
+},
+"floor2_ahu_dis_temp_set": {
+"path":"oveTDisAir[2]",
+"description":"the discharge air temperature setpoinit in AHU 2",
+"type":"input"
+},
+"floor3_ahu_dis_temp_set": {
+"path":"oveTDisAir[3]",
+"description":"the discharge air temperature setpoinit in AHU 3",
 "type":"input"
 },
 "floor1_ahu_supply_fan_power": {
