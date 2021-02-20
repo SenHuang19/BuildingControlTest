@@ -92,7 +92,7 @@ def path2modifer(keys,info,config):
     '''   
     modifier = ''
     for key in keys.keys():
-#       print keys[key]
+       print keys[key]
        if keys[key] is not None:
           if not isinstance(keys[key],dict):
                keys[key] = ast.literal_eval(keys[key])
@@ -172,11 +172,12 @@ class TestCase(object):
         if 'scenario' in con:
             self.scenario = self.con['scenario']
         else:
-            self.scenario = {} 
+
             self.ios = {} 
             for key in self.info:
                 if self.info[key]['type'] == 'output' or self.info[key]['type'] == 'input':
-                       self.ios[key]={'name':key}                
+                       self.ios[key]={'name':key}                      
+            self.scenario = self.ios                       
         self.model_class = self.con['model_class']            
         self.model_template = templateEnv.get_template(con['model_template'])        
         modifer = path2modifer(self.scenario,self.info,self.config)        
