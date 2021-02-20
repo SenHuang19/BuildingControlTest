@@ -143,17 +143,17 @@
 "type":"input"
 },
 "floor1_ahu_dis_temp_set": {
-"path":"oveTDisAir[1]",
+"path":"oveFloor1TDisAir",
 "description":"the discharge air temperature setpoinit in AHU 1",
 "type":"input"
 },
 "floor2_ahu_dis_temp_set": {
-"path":"oveTDisAir[2]",
+"path":"oveFloor2TDisAir",
 "description":"the discharge air temperature setpoinit in AHU 2",
 "type":"input"
 },
 "floor3_ahu_dis_temp_set": {
-"path":"oveTDisAir[3]",
+"path":"oveFloor3TDisAir",
 "description":"the discharge air temperature setpoinit in AHU 3",
 "type":"input"
 },
