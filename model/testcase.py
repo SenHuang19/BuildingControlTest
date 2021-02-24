@@ -92,7 +92,7 @@ def path2modifer(keys,info,config):
     '''   
     modifier = ''
     for key in keys.keys():
-       print keys[key]
+#       print keys[key]
        if keys[key] is not None:
           if not isinstance(keys[key],dict):
                keys[key] = ast.literal_eval(keys[key])
@@ -108,7 +108,7 @@ def path2modifer(keys,info,config):
               for i in range(len(args)-2,-1,-1):   
                   temp =  args[i]+'('+temp+')'
               modifier = modifier + temp +',\n' 
-          print temp                
+#          print temp                
     return modifier[:-2]
        
 def path2IO(keys,info,config):
@@ -197,6 +197,7 @@ class TestCase(object):
         compile_fmu(modelpath, 
                 mopath,
                 compiler_log_level='error',
+                # compiler_options={"state_initial_equations":True},
                 target='me',
                 version='2.0',
                 jvm_args='-Xmx5g')

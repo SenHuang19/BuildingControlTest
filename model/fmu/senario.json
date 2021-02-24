@@ -157,6 +157,21 @@
 "description":"the discharge air temperature setpoinit in AHU 3",
 "type":"input"
 },
+"floor3_ahu_mix_temp_set": {
+"path":"floor3.duaFanAirHanUnit.mixingBox.ecoCon.pI.oveSetPoi",
+"description":"the mixed air temperature setpoinit in AHU 3",
+"type":"input"
+},
+"floor2_ahu_mix_temp_set": {
+"path":"floor2.duaFanAirHanUnit.mixingBox.ecoCon.pI.oveSetPoi",
+"description":"the mixed air temperature setpoinit in AHU 2",
+"type":"input"
+},
+"floor1_ahu_mix_temp_set": {
+"path":"floor1.duaFanAirHanUnit.mixingBox.ecoCon.pI.oveSetPoi",
+"description":"the mixed air temperature setpoinit in AHU 1",
+"type":"input"
+},
 "floor1_ahu_supply_fan_power": {
 "path":"floor1.duaFanAirHanUnit.supFan.P",
 "description":"supply fan power in AHU 1",
@@ -188,18 +203,48 @@
 "type":"output"
 },
 "floor1_ahu_dis_T": {
-"path":"floor1.duaFanAirHanUnit.senTemDisAir.T",
+"path":"floor1.duaFanAirHanUnit.cooCoil.coi.TAirLea",
 "description":"supply air temperature in AHU 1",
 "type":"output"
 },
 "floor2_ahu_dis_T": {
-"path":"floor2.duaFanAirHanUnit.senTemDisAir.T",
+"path":"floor2.duaFanAirHanUnit.cooCoil.coi.TAirLea",
 "description":"supply air temperature in AHU 2",
 "type":"output"
 },
 "floor3_ahu_dis_T": {
-"path":"floor3.duaFanAirHanUnit.senTemDisAir.T",
+"path":"floor3.duaFanAirHanUnit.cooCoil.coi.TAirLea",
 "description":"supply air temperature in AHU 3",
+"type":"output"
+},
+"floor1_ahu_mix_T": {
+"path":"floor1.duaFanAirHanUnit.mixingBox.mixBox.T",
+"description":"mixed air temperature in AHU 1",
+"type":"output"
+},
+"floor2_ahu_mix_T": {
+"path":"floor2.duaFanAirHanUnit.mixingBox.mixBox.T",
+"description":"mixed air temperature in AHU 2",
+"type":"output"
+},
+"floor3_ahu_mix_T": {
+"path":"floor3.duaFanAirHanUnit.mixingBox.mixBox.T",
+"description":"mixed air temperature in AHU 3",
+"type":"output"
+},
+"floor1_ahu_ret_T": {
+"path":"floor1.duaFanAirHanUnit.mixingBox.mixBox.temRet.T",
+"description":"return air temperature in AHU 1",
+"type":"output"
+},
+"floor2_ahu_ret_T": {
+"path":"floor2.duaFanAirHanUnit.mixingBox.mixBox.temRet.T",
+"description":"return air temperature in AHU 2",
+"type":"output"
+},
+"floor3_ahu_ret_T": {
+"path":"floor3.duaFanAirHanUnit.mixingBox.mixBox.temRet.T",
+"description":"return air temperature in AHU 3",
 "type":"output"
 },
 "floor1_ahu_dis_mflow": {
@@ -657,6 +702,36 @@
 "description":"cooling setpoint of zone 5 served by AHU 3",
 "type":"output"
 },
+"floor1_pressure_set": {
+"path":"floor1.duaFanAirHanUnit.supFan.variableSpeed.ovePreSetPoi.y",
+"description":"static pressure setpoint of AHU 1",
+"type":"output"
+},
+"floor2_pressure_set": {
+"path":"floor2.duaFanAirHanUnit.supFan.variableSpeed.ovePreSetPoi.y",
+"description":"static pressure setpoint of AHU 2",
+"type":"output"
+},
+"floor3_pressure_set": {
+"path":"floor3.duaFanAirHanUnit.supFan.variableSpeed.ovePreSetPoi.y",
+"description":"static pressure setpoint of AHU 3",
+"type":"output"
+},
+"floor1_dis_T_set": {
+"path":"floor1.duaFanAirHanUnit.cooCoil.pI.SetPoi",
+"description":"supply air temperature setpoint of AHU 1",
+"type":"output"
+},
+"floor2_dis_T_set": {
+"path":"floor2.duaFanAirHanUnit.cooCoil.pI.SetPoi",
+"description":"supply air temperature setpoint of AHU 2",
+"type":"output"
+},
+"floor3_dis_T_set": {
+"path":"floor3.duaFanAirHanUnit.cooCoil.pI.SetPoi",
+"description":"supply air temperature setpoint of AHU 3",
+"type":"output"
+},
 "outdoor_air_temp": {
 "path":"TDryBul",
 "description":"outdoor air temperature",
@@ -755,6 +830,26 @@
 "floor3_valve_pos": {
 "path":"floor3.duaFanAirHanUnit.cooCoil.val.y_actual",
 "description":"coil position in AHU 3",
+"type":"output"
+},
+"floor1_fan_spe": {
+"path":"floor1.duaFanAirHanUnit.supFan.Rat",
+"description":"fan speed ratio in AHU 1",
+"type":"output"
+},
+"floor2_fan_spe": {
+"path":"floor2.duaFanAirHanUnit.supFan.Rat",
+"description":"fan speed ratio in AHU 2",
+"type":"output"
+},
+"floor3_fan_spe": {
+"path":"floor3.duaFanAirHanUnit.supFan.Rat",
+"description":"fan speed ratio in AHU 3",
+"type":"output"
+},
+"floor1_fan_spe": {
+"path":"floor3.duaFanAirHanUnit.supFan.Rat",
+"description":"fan speed ratio in AHU 3",
 "type":"output"
 }
 }
