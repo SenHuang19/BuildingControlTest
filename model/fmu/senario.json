@@ -846,5 +846,95 @@
 "path":"floor3.duaFanAirHanUnit.supFan.Rat",
 "description":"fan speed ratio in AHU 3",
 "type":"output"
+},
+"floor1_mix_T_set": {
+"path":"floor1.duaFanAirHanUnit.mixingBox.ecoCon.pI.oveSetPoi.y",
+"description":"mixed air temeprature setpoint in AHU 1",
+"type":"output"
+},
+"floor2_mix_T_set": {
+"path":"floor2.duaFanAirHanUnit.mixingBox.ecoCon.pI.oveSetPoi.y",
+"description":"mixed air temeprature setpoint in AHU 2",
+"type":"output"
+},
+"floor3_mix_T_set": {
+"path":"floor3.duaFanAirHanUnit.mixingBox.ecoCon.pI.oveSetPoi.y",
+"description":"mixed air temeprature setpoint in AHU3",
+"type":"output"
+},
+"floor1_vav1_flow_set": {
+"path":"zonCon[1].oveAirFlowSetPoi.y",
+"description":"supply air flow rate setpoint of zone 1 served by AHU 1",
+"type":"output"
+},
+"floor1_vav2_flow_set": {
+"path":"zonCon[2].oveAirFlowSetPoi.y",
+"description":"supply air flow rate setpoint of zone 2 served by AHU 1",
+"type":"output"
+},
+"floor1_vav3_flow_set": {
+"path":"zonCon[3].oveAirFlowSetPoi.y",
+"description":"supply air flow rate setpoint of zone 3 served by AHU 1",
+"type":"output"
+},
+"floor1_vav4_flow_set": {
+"path":"zonCon[4].oveAirFlowSetPoi.y",
+"description":"supply air flow rate setpoint of zone 4 served by AHU 1",
+"type":"output"
+},
+"floor1_vav5_flow_set": {
+"path":"zonCon[5].oveAirFlowSetPoi.y",
+"description":"supply air flow rate setpoint of zone 5 served by AHU 1",
+"type":"output"
+},
+"floor2_vav1_flow_set": {
+"path":"zonCon[6].oveAirFlowSetPoi.y",
+"description":"supply air flow rate setpoint of zone 1 served by AHU 2",
+"type":"output"
+},
+"floor2_vav2_flow_set": {
+"path":"zonCon[7].oveAirFlowSetPoi.y",
+"description":"supply air flow rate setpoint of zone 2 served by AHU 2",
+"type":"output"
+},
+"floor2_vav3_flow_set": {
+"path":"zonCon[8].oveAirFlowSetPoi.y",
+"description":"supply air flow rate setpoint of zone 3 served by AHU 2",
+"type":"output"
+},
+"floor2_vav4_flow_set": {
+"path":"zonCon[9].oveAirFlowSetPoi.y",
+"description":"supply air flow rate setpoint of zone 4 served by AHU 2",
+"type":"output"
+},
+"floor2_vav5_flow_set": {
+"path":"zonCon[10].oveAirFlowSetPoi.y",
+"description":"supply air flow rate setpoint of zone 5 served by AHU 2",
+"type":"output"
+},
+"floor3_vav1_flow_set": {
+"path":"zonCon[11].oveAirFlowSetPoi.y",
+"description":"supply air flow rate setpoint of zone 1 served by AHU 3",
+"type":"output"
+},
+"floor3_vav2_flow_set": {
+"path":"zonCon[12].oveAirFlowSetPoi.y",
+"description":"supply air flow rate setpoint of zone 2 served by AHU 3",
+"type":"output"
+},
+"floor3_vav3_flow_set": {
+"path":"zonCon[13].oveAirFlowSetPoi.y",
+"description":"supply air flow rate setpoint of zone 3 served by AHU 3",
+"type":"output"
+},
+"floor3_vav4_flow_set": {
+"path":"zonCon[14].oveAirFlowSetPoi.y",
+"description":"supply air flow rate setpoint of zone 4 served by AHU 3",
+"type":"output"
+},
+"floor3_vav5_flow_set": {
+"path":"zonCon[15].oveAirFlowSetPoi.y",
+"description":"supply air flow rate setpoint of zone 5 served by AHU 23",
+"type":"output"
 }
 }
