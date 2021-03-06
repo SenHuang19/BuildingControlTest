@@ -76,7 +76,7 @@ class Faults(Resource):
         """GET request to receive the fault list."""
         return self.case.get_faults()
 
-class Fault_info(Resource):
+class Info(Resource):
     """Interface to get the detailed information of a selected fault."""
 
     def __init__(self, **kwargs):
@@ -89,7 +89,7 @@ class Fault_info(Resource):
         fault = args['fault']      
         return self.case.get_fault_info(fault) 
         
-class Fault_scenario(Resource):
+class Scenario(Resource):
     """Interface to test case simulation step size."""
 
     def __init__(self, **kwargs):
@@ -98,7 +98,7 @@ class Fault_scenario(Resource):
 
     def get(self):
         """GET request to receive current simulation step in seconds."""
-        return self.case.get_fault_scenario()
+        return self.case.get_scenario()
 
     def put(self):
         """PUT request to set simulation step in seconds."""
@@ -189,8 +189,8 @@ def main(config):
     api.add_resource(Inputs, '/inputs', resource_class_kwargs = {"case": case})
     api.add_resource(Measurements, '/measurements', resource_class_kwargs = {"case": case})
     api.add_resource(Faults, '/faults', resource_class_kwargs = {"case": case})
-    api.add_resource(Fault_info, '/fault_info', resource_class_kwargs = {"case": case, "parser_fault_info": parser_fault_info})
-    api.add_resource(Fault_scenario, '/fault_scenario', resource_class_kwargs = {"case": case, "parser_fault_scenario": parser_fault_scenario})
+    api.add_resource(Info, '/fault_info', resource_class_kwargs = {"case": case, "parser_fault_info": parser_fault_info})
+    api.add_resource(Scenario, '/fault_scenario', resource_class_kwargs = {"case": case, "parser_fault_scenario": parser_fault_scenario})
     # --------------------------------------
 
     app.run(debug=False, host='0.0.0.0')        
