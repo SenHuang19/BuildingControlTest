@@ -15,6 +15,7 @@ from jinja2 import Template
 import jinja2
 from pymodelica import compile_fmu
 import ast
+import numpy as np
 
 
 
@@ -318,12 +319,14 @@ class TestCase(object):
         for key in self.y.keys():
             self.y[key] = res[key][-1]
             if store:
-                self.y_store[key] = self.y_store[key] + res[key].tolist()[1:]
+#                self.y_store[key] = self.y_store[key] + res[key].tolist()[1:]
+                self.y_store[key] = np.append(self.y_store[key], res[key][1:])
         
         # Store control inputs
         if store:
             for key in self.u.keys():
-                self.u_store[key] = self.u_store[key] + res[key].tolist()[1:] 
+#                self.u_store[key] = self.u_store[key] + res[key].tolist()[1:] 
+                self.u_store[key] = np.append(self.u_store[key], res[key][1:])
 
     def advance(self,u):
         '''Advances the test case model simulation forward one step.
