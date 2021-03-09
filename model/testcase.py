@@ -173,11 +173,10 @@ class TestCase(object):
         if 'scenario' in con:
             self.scenario = self.con['scenario']
         else:
-
             self.ios = {} 
             for key in self.info:
                 if self.info[key]['type'] == 'output' or self.info[key]['type'] == 'input':
-                       self.ios[key]={'name':key}                      
+                    self.ios[key]={'name': key}
             self.scenario = self.ios                       
         self.model_class = self.con['model_class']            
         self.model_template = templateEnv.get_template(con['model_template'])        
@@ -316,17 +315,20 @@ class TestCase(object):
         '''
         
         # Get result and store measurement
+
         for key in self.y.keys():
             self.y[key] = res[key][-1]
             if store:
-#                self.y_store[key] = self.y_store[key] + res[key].tolist()[1:]
-                self.y_store[key] = np.append(self.y_store[key], res[key][1:])
+
+                self.y_store[key].append(res[key].tolist()[1:])
+
         
         # Store control inputs
         if store:
             for key in self.u.keys():
-#                self.u_store[key] = self.u_store[key] + res[key].tolist()[1:] 
-                self.u_store[key] = np.append(self.u_store[key], res[key][1:])
+
+                self.u_store[key].append(res[key].tolist()[1:])
+
 
     def advance(self,u):
         '''Advances the test case model simulation forward one step.
