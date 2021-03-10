@@ -1,10 +1,10 @@
-{"temp_sensor":{
+{"temp_sensor_fault":{
 "string":"redeclare BuildingControlEmulator.Devices.Fault.TemSensorDev {}(dt={}, FauTime={})"
 },
-"pressure_sensor":{
+"pressure_sensor_fault":{
 "string":"redeclare BuildingControlEmulator.Devices.Fault.PreSensorDev {}(dp={}, FauTime={})"
 },
-"valve":{
+"valve_fault":{
 "string":"redeclare BuildingControlEmulator.Devices.Fault.TwoWayLeak {}(y_leak={},FauTime={})"
 },
 "output":{

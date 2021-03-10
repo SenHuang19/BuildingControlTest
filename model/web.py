@@ -104,7 +104,7 @@ class Scenario(Resource):
         """PUT request to set simulation step in seconds."""
         args = self.parser_fault_scenario.parse_args()
         print args
-        self.case.set_fault_scenario(args)
+        self.case.set_scenario(args)
         return None  
 
 class Results(Resource):
