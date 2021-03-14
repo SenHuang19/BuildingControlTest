@@ -295,7 +295,7 @@ class TestCase(object):
 
         return res            
 
-    def __get_results(self, res, store=True):
+    def __get_results(self, res, store=False):
         '''Get results at the end of a simulation and throughout the 
         simulation period for storage. This method assigns these results
         to `self.y` and, if `store=True`, also to `self.y_store` and 
@@ -363,7 +363,7 @@ class TestCase(object):
         # Process results
         if res is not None:        
             # Get result and store measurement and control inputs
-            self.__get_results(res, store=True)
+            self.__get_results(res)
             # Advance start time
             self.start_time = self.final_time
             # Raise the flag to compute time lapse
