@@ -1,0 +1,14 @@
+{
+   "start_day": 200,
+   "simulation_duration_days": 5,
+   "step": 60,
+   "reset_frequency": 10,
+   "resets": {
+       "dct1": "reset_configs/floor1_static_reset.config",
+       "dct2": "reset_configs/floor2_static_reset.config",
+       "dct3": "reset_configs/floor3_static_reset.config",
+       "dat1": "reset_configs/floor1_dat_reset.config",
+       "dat2": "reset_configs/floor2_dat_reset.config",
+       "dat3": "reset_configs/floor3_dat_reset.config"
+   }
+}
