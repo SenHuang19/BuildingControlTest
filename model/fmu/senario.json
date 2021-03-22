@@ -348,52 +348,52 @@
 "type":"output"
 },
 "floor2_vav1_dis_mflow_ratio": {
-"path":"floor1.fivZonVAV.vAV[1].gain.y",
+"path":"floor2.fivZonVAV.vAV[1].gain.y",
 "description":"discharge air mass flowrate ratio of zone 1 served by AHU 2",
 "type":"output"
 },
 "floor2_vav2_dis_mflow_ratio": {
-"path":"floor1.fivZonVAV.vAV[2].gain.y",
+"path":"floor2.fivZonVAV.vAV[2].gain.y",
 "description":"discharge air mass flowrate ratio of zone 2 served by AHU 2",
 "type":"output"
 },
 "floor2_vav3_dis_mflow_ratio": {
-"path":"floor1.fivZonVAV.vAV[3].gain.y",
+"path":"floor2.fivZonVAV.vAV[3].gain.y",
 "description":"discharge air mass flowrate ratio of zone 3 served by AHU 2",
 "type":"output"
 },
 "floor2_vav4_dis_mflow_ratio": {
-"path":"floor1.fivZonVAV.vAV[4].gain.y",
+"path":"floor2.fivZonVAV.vAV[4].gain.y",
 "description":"discharge air mass flowrate ratio of zone 4 served by AHU 2",
 "type":"output"
 },
 "floor2_vav5_dis_mflow_ratio": {
-"path":"floor1.fivZonVAV.vAV[5].gain.y",
+"path":"floor2.fivZonVAV.vAV[5].gain.y",
 "description":"discharge air mass flowrate ratio of zone 5 served by AHU 2",
 "type":"output"
 },
 "floor3_vav1_dis_mflow_ratio": {
-"path":"floor1.fivZonVAV.vAV[1].gain.y",
+"path":"floor3.fivZonVAV.vAV[1].gain.y",
 "description":"discharge air mass flowrate ratio of zone 1 served by AHU 3",
 "type":"output"
 },
 "floor3_vav2_dis_mflow_ratio": {
-"path":"floor1.fivZonVAV.vAV[2].gain.y",
+"path":"floor3.fivZonVAV.vAV[2].gain.y",
 "description":"discharge air mass flowrate ratio of zone 2 served by AHU 3",
 "type":"output"
 },
 "floor3_vav3_dis_mflow_ratio": {
-"path":"floor1.fivZonVAV.vAV[3].gain.y",
+"path":"floor3.fivZonVAV.vAV[3].gain.y",
 "description":"discharge air mass flowrate ratio of zone 3 served by AHU 3",
 "type":"output"
 },
 "floor3_vav4_dis_mflow_ratio": {
-"path":"floor1.fivZonVAV.vAV[4].gain.y",
+"path":"floor3.fivZonVAV.vAV[4].gain.y",
 "description":"discharge air mass flowrate ratio of zone 4 served by AHU 3",
 "type":"output"
 },
 "floor3_vav5_dis_mflow_ratio": {
-"path":"floor1.fivZonVAV.vAV[5].gain.y",
+"path":"floor3.fivZonVAV.vAV[5].gain.y",
 "description":"discharge air mass flowrate ratio of zone 5 served by AHU 3",
 "type":"output"
 },
