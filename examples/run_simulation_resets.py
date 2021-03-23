@@ -48,7 +48,6 @@ class Simulate:
         """
         Get available data from simulation.
         """
-        # Measurements available
         measurements = requests.get('{0}/measurements'.format(self.url)).json()
         measurements.append('time')
         print('Measurements:\t\t\t{0}'.format(measurements))
@@ -59,11 +58,15 @@ class Simulate:
                 writer.writerow([line])
         self.measurements = measurements
 
-    def init_resets(self, config):
-        self.resets = reset.setup_resets(config, self.measurements)
-        for cls in self.resets:
-            self.u[cls.control] = cls.default_setpoint
-            self.u[cls.activate] = 0
+    def init_resets(self, reset_configs):
+        if reset_configs:
+            self.resets = reset.setup_resets(reset_configs, self.measurements)
+            for cls in self.resets:
+                self.u[cls.control] = cls.default_setpoint
+                self.u[cls.activate] = 0
+        else:
+            print("No resets configured!  Running baseline!")
+            self.u = {}
 
     def init_simulation(self):
         """
@@ -73,7 +76,6 @@ class Simulate:
         """
         res = requests.put('{0}/step'.format(self.url), data={"step": self.step})
         y = requests.post('{0}/advance'.format(self.url), json=json.dumps({})).json()
-
         res = requests.put('{0}/reset'.format(self.url), data={'start_time': self.start_time, 'end_time': self.end_time})
 
     def create_data_store(self):
@@ -81,7 +83,7 @@ class Simulate:
         Create results file for simulation.
         """
         dt_str = datetime.now().strftime("%b %d %Y %H:%M")
-        file_name = "results/results_{}".format(dt_str)
+        file_name = "results/results_{}.csv".format(dt_str)
 
         if not os.path.exists('results'):
             os.makedirs('results')
@@ -103,7 +105,7 @@ class Simulate:
         y = {}
         for i in range(int(self.loop)):
             # Advance simulation
-            if i % self.reset_frequency and y:
+            if self.resets is not None and i % self.reset_frequency and y:
                 for cls in self.resets:
                     cls.update(y)
                     r = cls.check_requests(y)
@@ -113,7 +115,7 @@ class Simulate:
                     print("Control: {} -- requests: {} -- i: {} -- name: {}".format(self.u, r, i, cls.name))
             y = requests.post('{0}/advance'.format(self.url), json=json.dumps(self.u)).json()
             self.writer.writerow(dict(sorted(y.items(), key=lambda x: x[0])))
-            print("Measurments: {}".format(y))
+            print("Measurements at time {}: {}".format(y['time'], y))
         print('\nTest case complete.')
 
 

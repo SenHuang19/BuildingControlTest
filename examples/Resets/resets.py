@@ -6,14 +6,10 @@ which mus already be running.  A controller is tested, which is
 imported from a different module.
   
 """
-import requests
-import os
 import sys
-import requests
 import numpy as np
 import json
 import importlib
-import csv
 from datetime import datetime, timedelta
 
 
@@ -208,11 +204,11 @@ class ChwReset(Reset):
         try:
             oat_low = config.pop("oat_low")
         except KeyError:
-            oat_low = 15.56
+            oat_low = 288.71
         try:
             oat_high = config.pop("oat_high")
         except KeyError:
-            oat_high = 21.11
+            oat_high = 294.26
         try:
             self.request1 = config.pop("request1")
         except KeyError:
@@ -244,7 +240,7 @@ class ChwReset(Reset):
         self.rated_clg_flow = {}
         self.device_list = []
         self.validate(measurements, config)
-        self.max_chw_bounds = np.linspace(10, 6.67, 100)
+        self.max_chw_bounds = np.linspace(self.max_sp, self.min_sp, 100)
         self.oat_bounds = np.linspace(oat_low, oat_high, 100)
 
     def validate(self, measurements, config):

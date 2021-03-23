@@ -1,0 +1,7 @@
+{
+   "start_day": 200,
+   "simulation_duration_days": 5,
+   "step": 60,
+   "reset_frequency": 10,
+   "resets": {}
+}
