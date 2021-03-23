@@ -229,7 +229,7 @@ mutable struct OptimizationParams
         # obj.cl_numdays = parse_float(conf, "cl_params", "numdays")
         # obj.cl_nompcdays = parse_float(conf, "cl_params", "nompcdays")
         # obj.cl_nosolvewindow = parse_int(conf, "cl_params", "nosolvewindow")
-        obj.cl_MAwindow = parse_int(conf, "model_params", "MAwindow")
+        obj.cl_MAwindow = parse_int(conf, "other_params", "MAwindow")
         # obj.cl_rate_supplytemp = parse_float(conf, "cl_params", "rate_supplytemp")
         # obj.cl_minPerSample = parse_float(conf, "cl_params", "minPerSample")
         # obj.mpcMovingBlockImpl = parse_bool(conf, "cl_params", "mpcMovingBlockImpl")
