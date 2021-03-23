@@ -123,7 +123,7 @@ class DatReset(Reset):
         try:
             self.htg_request_thr = config.pop("htg_request_thr")
         except KeyError:
-            self.htg_request_thr = 0.95
+            self.htg_request_thr = 0.2
         try:
             self.oat_name = config.pop("oat_name")
         except KeyError:
@@ -172,7 +172,7 @@ class DatReset(Reset):
             clg_signal = measurements[self.zclg[zone]]
             htg_signal = measurements[self.zhtg[zone]]
             print("name: {} - zone {} -- occ {} -- max_sp: {} -- zt: {} -- cps: {} -- clg: {} -- htg: {}".format(self.name, zone, self.occupancy, self.max_sp, zt, csp, clg_signal, htg_signal))
-            if htg_signal < 5.0 and clg_signal > self.clg_request_thr:
+            if htg_signal < 0.05 and clg_signal > self.clg_request_thr:
                 if zt - csp > self.request2:
                     temp = 3
                 elif zt - csp > self.request1:
