@@ -17,7 +17,7 @@ length = 24 * 3600
 step = 60
 step_def = JSON.parse(String(HTTP.get("$url/step").body))
 HTTP.post("$url/advance", ["Content-Type" => "application/json","connecttimeout"=>30.0], JSON.json(Dict());retry_non_idempotent=true)
-HTTP.put("$url/reset",["Content-Type" => "application/json"], JSON.json(Dict("start_time" => 198*86400,"end_time" => 202*86400)))
+HTTP.put("$url/reset",["Content-Type" => "application/json"], JSON.json(Dict("start_time" => 200*86400,"end_time" => 204*86400)))
 
 #
 numfloors = 3

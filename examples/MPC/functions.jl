@@ -53,8 +53,8 @@ mutable struct Params
     ahuflow_min::Vector{Float64}           # of length numfloors
     ahuflow_max::Vector{Float64}           # of length numfloors
     fan_params::Array{Float64,2}            # of length 4
-    pressure_min::Vector{Float64}
-    pressure_max::Vector{Float64}
+    # pressure_min::Vector{Float64}
+    # pressure_max::Vector{Float64}
     damper_min::Vector{Float64}
     damper_max::Vector{Float64}
     # startup_time::Int
@@ -139,13 +139,13 @@ mutable struct Params
 
         # static pressure parameters
         section = "pressure_damper_params"
-        obj.pressure_min = ones(obj.numfloors)
-        obj.pressure_max = ones(obj.numfloors) 
+        # obj.pressure_min = ones(obj.numfloors)
+        # obj.pressure_max = ones(obj.numfloors)
         obj.damper_min = ones(obj.numfloors)
         obj.damper_max = ones(obj.numfloors)
         for f in 1:obj.numfloors
-            obj.pressure_min[f] = parse_float(conf, section, "floor$(f)_pressure_min")
-            obj.pressure_max[f] = parse_float(conf, section, "floor$(f)_pressure_max")
+            # obj.pressure_min[f] = parse_float(conf, section, "floor$(f)_pressure_min")
+            # obj.pressure_max[f] = parse_float(conf, section, "floor$(f)_pressure_max")
             obj.damper_min[f] = parse_float(conf, section, "floor$(f)_damper_min")
             obj.damper_max[f] = parse_float(conf, section, "floor$(f)_damper_max")
         end
@@ -182,15 +182,15 @@ mutable struct OptimizationParams
     loadpredflag::Int
     solverflag::Int
     maxiter::Int
-    cl_baseline::Int
-    cl_startday::Float64
-    cl_numdays::Float64
-    cl_nompcdays::Float64
-    cl_nosolvewindow::Int
+    # cl_baseline::Int
+    # cl_startday::Float64
+    # cl_numdays::Float64
+    # cl_nompcdays::Float64
+    # cl_nosolvewindow::Int
     cl_MAwindow::Int
-    cl_rate_supplytemp::Float64
-    cl_minPerSample::Float64
-    mpcMovingBlockImpl::Bool
+    # cl_rate_supplytemp::Float64
+    # cl_minPerSample::Float64
+    # mpcMovingBlockImpl::Bool
 
     # inner constructor
     function OptimizationParams()
@@ -223,16 +223,16 @@ mutable struct OptimizationParams
         obj.solverflag = parse_int(conf, "solver_params", "solverflag")
         obj.maxiter = parse_int(conf, "solver_params", "maxiter")
 
-        # closedloop params
-        obj.cl_baseline = parse_int(conf, "cl_params", "baseline")
-        obj.cl_startday = parse_float(conf, "cl_params", "startday")
-        obj.cl_numdays = parse_float(conf, "cl_params", "numdays")
-        obj.cl_nompcdays = parse_float(conf, "cl_params", "nompcdays")
-        obj.cl_nosolvewindow = parse_int(conf, "cl_params", "nosolvewindow")
-        obj.cl_MAwindow = parse_int(conf, "cl_params", "MAwindow")
-        obj.cl_rate_supplytemp = parse_float(conf, "cl_params", "rate_supplytemp")
-        obj.cl_minPerSample = parse_float(conf, "cl_params", "minPerSample")
-        obj.mpcMovingBlockImpl = parse_bool(conf, "cl_params", "mpcMovingBlockImpl")
+        # # closedloop params
+        # obj.cl_baseline = parse_int(conf, "cl_params", "baseline")
+        # obj.cl_startday = parse_float(conf, "cl_params", "startday")
+        # obj.cl_numdays = parse_float(conf, "cl_params", "numdays")
+        # obj.cl_nompcdays = parse_float(conf, "cl_params", "nompcdays")
+        # obj.cl_nosolvewindow = parse_int(conf, "cl_params", "nosolvewindow")
+        obj.cl_MAwindow = parse_int(conf, "model_params", "MAwindow")
+        # obj.cl_rate_supplytemp = parse_float(conf, "cl_params", "rate_supplytemp")
+        # obj.cl_minPerSample = parse_float(conf, "cl_params", "minPerSample")
+        # obj.mpcMovingBlockImpl = parse_bool(conf, "cl_params", "mpcMovingBlockImpl")
 
         return obj
     end
@@ -308,8 +308,8 @@ window_index = Dict(t => round(Int, ceil(t/o.controlwindow)) for t = 1:o.numstag
 # return-air temperatures at the AHU level
 @variable(m, ahureturntemp[f = 1:p.numfloors, t = 1:o.numstages])
 
-# internal-air temperatures at the AHU level
-@variable(m, ahuinternaltemp[f = 1:p.numfloors, t = 1:o.numstages])
+# # internal-air temperatures at the AHU level
+# @variable(m, ahuinternaltemp[f = 1:p.numfloors, t = 1:o.numstages])
 
 # zone temperatures
 @variable(m, zonetemp[f = 1:p.numfloors, z = 1:p.numzones, t = 1:o.numstages])
@@ -366,11 +366,11 @@ end
 @NLconstraint(m, mincomfort_cons[f = 1:p.numfloors, z = 1:p.numzones, t = 1:o.numstages] ,zonetemp[f, z, t] >= heatsetpoint[t] - slack)
 @NLconstraint(m, maxcomfort_cons[f = 1:p.numfloors, z = 1:p.numzones, t = 1:o.numstages], zonetemp[f, z, t] <= coolsetpoint[t] + slack)
 
-# internal temperature is upper bound of mixed-air temperature
-@constraint(m, intmixed_cons[f = 1:p.numfloors, t = 1:o.numstages], ahuinternaltemp[f, t] >= ahumixedtemp[f, t])
-
-# internal temperature is upper bound of supply-air temperature
-@constraint(m, intsupply_cons[f = 1:p.numfloors, t = 1:o.numstages], ahuinternaltemp[f, t] >= ahusupplytemp[f, window_index[t]])
+# # internal temperature is upper bound of mixed-air temperature
+# @constraint(m, intmixed_cons[f = 1:p.numfloors, t = 1:o.numstages], ahuinternaltemp[f, t] >= ahumixedtemp[f, t])
+#
+# # internal temperature is upper bound of supply-air temperature
+# @constraint(m, intsupply_cons[f = 1:p.numfloors, t = 1:o.numstages], ahuinternaltemp[f, t] >= ahusupplytemp[f, window_index[t]])
 
 # discharge temperature is upper bound of supply-air temperatures
 @constraint(m, discsup_cons[f = 1:p.numfloors, z = 1:p.numzones, h = 1:o.numwindows], zonedischargetemp[f, z, h] >= ahusupplytemp[f, h])
@@ -409,7 +409,7 @@ end
 
 # expression for chiller capacity (energy) delivered
 @NLexpression(m, chillercapacity[f = 1:p.numfloors, t = 1:o.numstages],
-                p.specheat * sum_zoneflows[f, t] * (ahuinternaltemp[f, t] - ahusupplytemp[f, window_index[t]]))
+                p.specheat * sum_zoneflows[f, t] * (ahumixedtemp[f, t] - ahusupplytemp[f, window_index[t]]))
 
 # expression for VAV-box reheat (energy) consumption
 @NLexpression(m, vavcapacity[f = 1:p.numfloors, t = 1:o.numstages],
@@ -417,7 +417,7 @@ end
 
 # expression for total heating capacity (AHU + VAV) (energy) delivered
 @NLexpression(m, heatingcapacity[f = 1:p.numfloors, t = 1:o.numstages],
-                p.specheat * sum_zoneflows[f, t] * (ahuinternaltemp[f, t] - ahumixedtemp[f, t]) + vavcapacity[f, t])
+                vavcapacity[f, t])
 
 # # expression for total chiller capacity per stage
 # @NLexpression(m, chillercap_total[t = 1:o.numstages],
