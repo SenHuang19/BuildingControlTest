@@ -12,7 +12,7 @@ using HTTP, JSON, CSV, DataFrames
 # ----------------------
 include("./controllers.jl")
 using .MPC
-url = "http://127.0.0.1:5500"
+url = "http://eplus:5500"
 length = 24 * 3600
 step = 60
 step_def = JSON.parse(String(HTTP.get("$url/step").body))
