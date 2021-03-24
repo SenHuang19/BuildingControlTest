@@ -55,18 +55,18 @@ mutable struct Params
     fan_params::Array{Float64,2}            # of length 4
     # pressure_min::Vector{Float64}
     # pressure_max::Vector{Float64}
-    massflow_sample_0::Float64
-    massflow_sample_1::Float64
-    massflow_sample_2::Float64
-    massflow_sample_3::Float64
-    massflow_sample_4::Float64
-    massflow_sample_5::Float64
-    pressure_sample_0::Float64
-    pressure_sample_1::Float64
-    pressure_sample_2::Float64
-    pressure_sample_3::Float64
-    pressure_sample_4::Float64
-    pressure_sample_5::Float64
+    massflow_sample_0::Vector{Float64}
+    massflow_sample_1::Vector{Float64}
+    massflow_sample_2::Vector{Float64}
+    massflow_sample_3::Vector{Float64}
+    massflow_sample_4::Vector{Float64}
+    massflow_sample_5::Vector{Float64}
+    pressure_sample_0::Vector{Float64}
+    pressure_sample_1::Vector{Float64}
+    pressure_sample_2::Vector{Float64}
+    pressure_sample_3::Vector{Float64}
+    pressure_sample_4::Vector{Float64}
+    pressure_sample_5::Vector{Float64}
     damper_min::Vector{Float64}
     damper_max::Vector{Float64}
     # startup_time::Int
@@ -153,21 +153,33 @@ mutable struct Params
         section = "pressure_damper_params"
         # obj.pressure_min = ones(obj.numfloors)
         # obj.pressure_max = ones(obj.numfloors)
-        obj.massflow_sample_0 = parse_float(conf, section, "massflow_sample_0")
-        obj.massflow_sample_1 = parse_float(conf, section, "massflow_sample_1")
-        obj.massflow_sample_2 = parse_float(conf, section, "massflow_sample_2")
-        obj.massflow_sample_3 = parse_float(conf, section, "massflow_sample_3")
-        obj.massflow_sample_4 = parse_float(conf, section, "massflow_sample_4")
-        obj.massflow_sample_5 = parse_float(conf, section, "massflow_sample_5")
-        obj.pressure_sample_0 = parse_float(conf, section, "pressure_sample_0")
-        obj.pressure_sample_1 = parse_float(conf, section, "pressure_sample_1")
-        obj.pressure_sample_2 = parse_float(conf, section, "pressure_sample_2")
-        obj.pressure_sample_3 = parse_float(conf, section, "pressure_sample_3")
-        obj.pressure_sample_4 = parse_float(conf, section, "pressure_sample_4")
-        obj.pressure_sample_5 = parse_float(conf, section, "pressure_sample_5")
+        obj.massflow_sample_0 = ones(obj.numfloors)
+        obj.massflow_sample_1 = ones(obj.numfloors)
+        obj.massflow_sample_2 = ones(obj.numfloors)
+        obj.massflow_sample_3 = ones(obj.numfloors)
+        obj.massflow_sample_4 = ones(obj.numfloors)
+        obj.massflow_sample_5 = ones(obj.numfloors)
+        obj.pressure_sample_0 = ones(obj.numfloors)
+        obj.pressure_sample_1 = ones(obj.numfloors)
+        obj.pressure_sample_2 = ones(obj.numfloors)
+        obj.pressure_sample_3 = ones(obj.numfloors)
+        obj.pressure_sample_4 = ones(obj.numfloors)
+        obj.pressure_sample_5 = ones(obj.numfloors)
         obj.damper_min = ones(obj.numfloors)
         obj.damper_max = ones(obj.numfloors)
         for f in 1:obj.numfloors
+            obj.massflow_sample_0[f] = parse_float(conf, section, "floor$(f)_massflow_sample_0")
+            obj.massflow_sample_1[f] = parse_float(conf, section, "floor$(f)_massflow_sample_1")
+            obj.massflow_sample_2[f] = parse_float(conf, section, "floor$(f)_massflow_sample_2")
+            obj.massflow_sample_3[f] = parse_float(conf, section, "floor$(f)_massflow_sample_3")
+            obj.massflow_sample_4[f] = parse_float(conf, section, "floor$(f)_massflow_sample_4")
+            obj.massflow_sample_5[f] = parse_float(conf, section, "floor$(f)_massflow_sample_5")
+            obj.pressure_sample_0[f] = parse_float(conf, section, "floor$(f)_pressure_sample_0")
+            obj.pressure_sample_1[f] = parse_float(conf, section, "floor$(f)_pressure_sample_1")
+            obj.pressure_sample_2[f] = parse_float(conf, section, "floor$(f)_pressure_sample_2")
+            obj.pressure_sample_3[f] = parse_float(conf, section, "floor$(f)_pressure_sample_3")
+            obj.pressure_sample_4[f] = parse_float(conf, section, "floor$(f)_pressure_sample_4")
+            obj.pressure_sample_5[f] = parse_float(conf, section, "floor$(f)_pressure_sample_5")
             # obj.pressure_min[f] = parse_float(conf, section, "floor$(f)_pressure_min")
             # obj.pressure_max[f] = parse_float(conf, section, "floor$(f)_pressure_max")
             obj.damper_min[f] = parse_float(conf, section, "floor$(f)_damper_min")
@@ -677,7 +689,7 @@ function predictloads(history::DataFrames.DataFrame)
                     actual = history[row + 1, Symbol("floor$(f)_zon$(z)_TRooAir_y")] # ("zonetemp_f$(f)z$z")]
                     sum_error += (actual - pred)
                 end
-                loads[f, z, :] = sum_error / o.cl_MAwindow  # average of the mispredictions
+                loads[f, z, :] .= sum_error / o.cl_MAwindow  # average of the mispredictions
             end
         end
     end
@@ -715,7 +727,7 @@ function setoverrides!(df::DataFrames.DataFrame;
                 # else
                 #     insertcols!(df, size(df, 2) + 1, Symbol("set_ahupressure_f$f") => staticpressure(mflow))
                 # end
-                df[1, Symbol("set_ahupressure_f$f")] = staticpressure(mflow)
+                df[1, Symbol("set_ahupressure_f$f")] = staticpressure(mflow, f)
 
                 ## zone-level setpoints
                 for z = 1:p.numzones
@@ -863,15 +875,16 @@ end
 """
 Determine static pressure setpoints using convex hull information.
 """
-function staticpressure(mflow::Float64)
+function staticpressure(mflow::Float64, fInd::Int64)
     # # massflow breakpoints
     # m0, m1, m2, m3, m4, m5 = sum(p.zoneflow_min), 5.81, 16.68, 17.05, 17.61, sum(p.zoneflow_max)
     # # pressure breakpoints
     # p0, p1, p2, p3, p4, p5 = 24.88, 24.88, 121.51, 128.68, 160.88, 160.88
+    f = fInd # Index of floor level
     # massflow breakpoints
-    m0, m1, m2, m3, m4, m5 = p.massflow_sample_0, p.massflow_sample_1, p.massflow_sample_2, p.massflow_sample_3, p.massflow_sample_4, p.massflow_sample_5
+    m0, m1, m2, m3, m4, m5 = p.massflow_sample_0[f], p.massflow_sample_1[f], p.massflow_sample_2[f], p.massflow_sample_3[f], p.massflow_sample_4[f], p.massflow_sample_5[f]
     # pressure breakpoints
-    p0, p1, p2, p3, p4, p5 = p.pressure_sample_0, p.pressure_sample_1, p.pressure_sample_2, p.pressure_sample_3, p.pressure_sample_4, p.pressure_sample_5
+    p0, p1, p2, p3, p4, p5 = p.pressure_sample_0[f], p.pressure_sample_1[f], p.pressure_sample_2[f], p.pressure_sample_3[f], p.pressure_sample_4[f], p.pressure_sample_5[f]
 
     # piecewise-linear pressure function
     if  m0 <= mflow <= m1
