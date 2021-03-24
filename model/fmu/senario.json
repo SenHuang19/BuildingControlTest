@@ -782,6 +782,21 @@
 "description":"static pressure setpoint of AHU 1",
 "type":"output"
 },
+"floor1_pressure": {
+"path":"floor1.duaFanAirHanUnit.add.y",
+"description":"static pressure of AHU 1",
+"type":"output"
+},
+"floor2_pressure": {
+"path":"floor2.duaFanAirHanUnit.add.y",
+"description":"static pressure of AHU 2",
+"type":"output"
+},
+"floor3_pressure": {
+"path":"floor3.duaFanAirHanUnit.add.y",
+"description":"static pressure of AHU 3",
+"type":"output"
+},
 "floor2_pressure_set": {
 "path":"floor2.duaFanAirHanUnit.supFan.variableSpeed.ovePreSetPoi.y",
 "description":"static pressure setpoint of AHU 2",
