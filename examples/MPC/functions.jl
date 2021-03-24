@@ -55,6 +55,18 @@ mutable struct Params
     fan_params::Array{Float64,2}            # of length 4
     # pressure_min::Vector{Float64}
     # pressure_max::Vector{Float64}
+    massflow_sample_0::Float64
+    massflow_sample_1::Float64
+    massflow_sample_2::Float64
+    massflow_sample_3::Float64
+    massflow_sample_4::Float64
+    massflow_sample_5::Float64
+    pressure_sample_0::Float64
+    pressure_sample_1::Float64
+    pressure_sample_2::Float64
+    pressure_sample_3::Float64
+    pressure_sample_4::Float64
+    pressure_sample_5::Float64
     damper_min::Vector{Float64}
     damper_max::Vector{Float64}
     # startup_time::Int
@@ -141,6 +153,18 @@ mutable struct Params
         section = "pressure_damper_params"
         # obj.pressure_min = ones(obj.numfloors)
         # obj.pressure_max = ones(obj.numfloors)
+        obj.massflow_sample_0 = parse_float(conf, section, "massflow_sample_0")
+        obj.massflow_sample_1 = parse_float(conf, section, "massflow_sample_1")
+        obj.massflow_sample_2 = parse_float(conf, section, "massflow_sample_2")
+        obj.massflow_sample_3 = parse_float(conf, section, "massflow_sample_3")
+        obj.massflow_sample_4 = parse_float(conf, section, "massflow_sample_4")
+        obj.massflow_sample_5 = parse_float(conf, section, "massflow_sample_5")
+        obj.pressure_sample_0 = parse_float(conf, section, "pressure_sample_0")
+        obj.pressure_sample_1 = parse_float(conf, section, "pressure_sample_1")
+        obj.pressure_sample_2 = parse_float(conf, section, "pressure_sample_2")
+        obj.pressure_sample_3 = parse_float(conf, section, "pressure_sample_3")
+        obj.pressure_sample_4 = parse_float(conf, section, "pressure_sample_4")
+        obj.pressure_sample_5 = parse_float(conf, section, "pressure_sample_5")
         obj.damper_min = ones(obj.numfloors)
         obj.damper_max = ones(obj.numfloors)
         for f in 1:obj.numfloors
@@ -278,7 +302,10 @@ m = JuMP.Model(with_optimizer(Ipopt.Optimizer, max_iter = o.maxiter, print_level
 
 # map decision stages to control windows in MPC
 window_index = Dict(t => round(Int, ceil(t/o.controlwindow)) for t = 1:o.numstages)
-
+global true_outsidetemp = DataFrames.DataFrame()
+if  o.oatpredflag == 1
+    true_outsidetemp = CSV.read("daily_oat_sample.csv", DataFrame);
+end
 
 ## list of supervisory setpoints set by MPC (these are sent to Modelica)
 # supply-air temperatures at the AHU level
@@ -837,10 +864,15 @@ end
 Determine static pressure setpoints using convex hull information.
 """
 function staticpressure(mflow::Float64)
+    # # massflow breakpoints
+    # m0, m1, m2, m3, m4, m5 = sum(p.zoneflow_min), 5.81, 16.68, 17.05, 17.61, sum(p.zoneflow_max)
+    # # pressure breakpoints
+    # p0, p1, p2, p3, p4, p5 = 24.88, 24.88, 121.51, 128.68, 160.88, 160.88
     # massflow breakpoints
-    m0, m1, m2, m3, m4, m5 = sum(p.zoneflow_min), 5.81, 16.68, 17.05, 17.61, sum(p.zoneflow_max)
+    m0, m1, m2, m3, m4, m5 = p.massflow_sample_0, p.massflow_sample_1, p.massflow_sample_2, p.massflow_sample_3, p.massflow_sample_4, p.massflow_sample_5
     # pressure breakpoints
-    p0, p1, p2, p3, p4, p5 = 24.88, 24.88, 121.51, 128.68, 160.88, 160.88
+    p0, p1, p2, p3, p4, p5 = p.pressure_sample_0, p.pressure_sample_1, p.pressure_sample_2, p.pressure_sample_3, p.pressure_sample_4, p.pressure_sample_5
+
     # piecewise-linear pressure function
     if  m0 <= mflow <= m1
         pressure = p0 + (p1 - p0) * (mflow - m0) / (m1 - m0)
