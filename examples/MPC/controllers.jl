@@ -12,7 +12,7 @@ global dfCurrentSetpoints = DataFrames.DataFrame()
 global dfCurrentMeasurements = DataFrames.DataFrame()
 global dfCurrentMeasurements_history = DataFrames.DataFrame()
 global originalMaxIter = o.maxiter
-
+global start_minute = 0
 """
 This module implements an MPC controller.
 """
@@ -24,8 +24,9 @@ function compute_control!(u::Dict, currentMeasurements::Dict)
     # compute the control input from the measurement.
     # u: dict Defines the control input to be used for the next step.
     # {<input_name> : <input_value>}
-    global start_minute = 288001 # 17280060/60
+    # global start_minute = 288001 # 17280060/60
     current_minute = currentMeasurements["Time"]/60.0
+    # println(start_minute)
     minute = current_minute - start_minute
     minute_of_day = Helper.minute_of_day(current_minute)
     global dfCurrentMeasurements = dict2df!(dfCurrentMeasurements, currentMeasurements)

@@ -24,9 +24,10 @@ numzones = 5
 
 
 global CurrentMeasurements = Dict{String, Float64}()
-for Timestep in 1:1:50 # Read the $Timestep row of csv file
+for Timestep in 1:1:5 # Read the $Timestep row of csv file
     if Timestep == 1
         global u = MPC.initialize()
+        global start_minute = df[!, Symbol("time")][Timestep]/60
     end
     # Simulation time in seconds
     CurrentMeasurements["Time"] = df[!, Symbol("time")][Timestep];
@@ -46,6 +47,7 @@ for Timestep in 1:1:50 # Read the $Timestep row of csv file
             CurrentMeasurements["floor$(f)_zon$(z)_mSupAir_y"] = df[!, Symbol("floor$(f)_vav$(z)_dis_mflow")][Timestep]# # zoneflow in Kg/s
         end
     end
+    print(start_minute)
     # u, CurrentMeasurements = MPC.initialize()
     u = MPC.compute_control!(u, CurrentMeasurements)
     println(u["floor1_aHU_con_oveMinOAFra_u"])
