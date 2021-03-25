@@ -140,7 +140,7 @@ class DatReset(Reset):
         self.zhtg = {}
         self.zone_list = []
         self.validate(measurements, config)
-        self.max_sat_bounds = np.linspace(self.max_sp, self.max_sp, 100)
+        self.max_sat_bounds = np.linspace(self.max_sp, self.min_sp, 100)
         self.oat_bounds = np.linspace(oat_low, oat_high, 100)
 
     def validate(self, measurements, config):
