@@ -8,7 +8,7 @@ global status_badSolution = [MOI.ALMOST_LOCALLY_SOLVED, MOI.INFEASIBLE, MOI.DUAL
 global status_userLim = [MOI.ITERATION_LIMIT, MOI.TIME_LIMIT, MOI.NODE_LIMIT, MOI.SOLUTION_LIMIT, MOI.MEMORY_LIMIT, MOI.OBJECTIVE_LIMIT, MOI.NORM_LIMIT, MOI.OTHER_LIMIT]
 
 global dfCurrentSetpoints = DataFrames.DataFrame()
-# global dfPastSetpoints = deepcopy(dfCurrentSetpoints)
+global dfPastSetpoints = DataFrames.DataFrame()
 global dfCurrentMeasurements = DataFrames.DataFrame()
 global dfCurrentMeasurements_history = DataFrames.DataFrame()
 global originalMaxIter = o.maxiter
@@ -26,7 +26,7 @@ function compute_control!(u::Dict, currentMeasurements::Dict)
     # {<input_name> : <input_value>}
     # global start_minute = 288001 # 17280060/60
     current_minute = currentMeasurements["Time"]/60.0
-    # println(start_minute)
+    # println("MPC:",start_minute)
     minute = current_minute - start_minute
     minute_of_day = Helper.minute_of_day(current_minute)
     global dfCurrentMeasurements = dict2df!(dfCurrentMeasurements, currentMeasurements)

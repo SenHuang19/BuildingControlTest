@@ -35,29 +35,32 @@ for Timestep in 1:1:1440*14
 	    global u = u_ini
 	    global u_control = Dict{String, Float64}()
 		global y = JSON.parse(String(HTTP.post("$url/advance", ["Content-Type" => "application/json","connecttimeout"=>30.0], JSON.json(u_control);retry_non_idempotent=true).body))
+		global start_minute = y["time"]/60
+		@eval MPC start_minute,dfPastSetpoints = Main.start_minute, MPC.dict2df!(MPC.dfPastSetpoints,Main.u)
+		println("Starting minute:",start_minute)
     elseif mod(Timestep,5) ==0
 	  if y["occ"]>0
 	    u = MPC.compute_control!(u, CurrentMeasurements)
 	    for f = 1 : numfloors
 #          u_control["floor$(f)_ahu_dis_temp_set_u"] = u["floor$(f)_aHU_con_oveTSetSupAir_u"]
 #          u_control["floor$(f)_ahu_dis_temp_set_activate"] = 1
-          println(u["floor$(f)_aHU_con_oveTSetSupAir_u"]) 
+          println(u["floor$(f)_aHU_con_oveTSetSupAir_u"])
           for z = 1 : numzones
 		     Tz_ind = (f-1)*numfloors + z
              u_control["mAirFlow[$(Tz_ind)]"] = u["floor$(f)_zon$(z)_oveAirFloRat_u"]
              u_control["mAirFlow_activate[$(Tz_ind)]"] = 1
 			 println(u["floor$(f)_zon$(z)_oveAirFloRat_u"])
 #             u_control["yPos[$(Tz_ind)]"] = u["floor$(f)_zon$(z)_oveHeaOut_u"]
-#             u_control["yPos_activate[$(Tz_ind)]"] = 1	
-          end		 
-        end		
+#             u_control["yPos_activate[$(Tz_ind)]"] = 1
+          end
+        end
       else
-        u_control = Dict{String, Float64}()	  
+        u_control = Dict{String, Float64}()
       end
 	  y = JSON.parse(String(HTTP.post("$url/advance", ["Content-Type" => "application/json","connecttimeout"=>30.0], JSON.json(u_control);retry_non_idempotent=true).body))
 	else
 	  y = JSON.parse(String(HTTP.post("$url/advance", ["Content-Type" => "application/json","connecttimeout"=>30.0], JSON.json(u_control);retry_non_idempotent=true).body))
-    end	
+    end
 	df_y = MPC.dict2df!(df_y, y) # Convert y into dataframes
 	if Timestep == 1
 		CSV.write("./result_all.csv", df_y)
