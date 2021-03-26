@@ -1,4 +1,7 @@
-{"temp_sensor_fault":{
+{"zone_sensor_fault":{
+"string":"{}(dt={}, FauTime={})"
+},
+"temp_sensor_fault":{
 "string":"redeclare BuildingControlEmulator.Devices.Fault.TemSensorDev {}(dt={}, FauTime={})"
 },
 "pressure_sensor_fault":{

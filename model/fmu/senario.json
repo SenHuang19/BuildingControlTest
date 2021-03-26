@@ -1,4 +1,16 @@
-{"floor1_ahu_dis": {
+{"floor1_zonT": {
+"path":"floor1.fivZonVAV",
+"description":"sensors for the zone temperature in AHU 1",
+"type":"zone_sensor_fault"},
+"floor2_zonT": {
+"path":"floor2.fivZonVAV",
+"description":"sensors for the zone temperature in AHU 2",
+"type":"zone_sensor_fault"},
+"floor3_zonT": {
+"path":"floor3.fivZonVAV",
+"description":"sensors for the zone temperature in AHU 3",
+"type":"zone_sensor_fault"},
+"floor1_ahu_dis": {
 "path":"floor1.duaFanAirHanUnit.cooCoil.coi.temLeaAir",
 "description":"sensor for the discharge air temperature in AHU 1",
 "type":"temp_sensor_fault"},
@@ -290,21 +302,6 @@
 "floor3_ahu_fre_damper_pos": {
 "path":"floor3.duaFanAirHanUnit.mixingBox.mixBox.valFre.y",
 "description":"outdoor air damper position of AHU 3",
-"type":"output"
-},
-"floor1_ahu_mix_T": {
-"path":"floor1.duaFanAirHanUnit.mixingBox.mixBox.temMix.T",
-"description":"mixing air temperature in AHU 1",
-"type":"output"
-},
-"floor2_ahu_mix_T": {
-"path":"floor2.duaFanAirHanUnit.mixingBox.mixBox.temMix.T",
-"description":"mixing air temperature in AHU 2",
-"type":"output"
-},
-"floor3_ahu_mix_T": {
-"path":"floor3.duaFanAirHanUnit.mixingBox.mixBox.temMix.T",
-"description":"mixing air temperature in AHU 3",
 "type":"output"
 },
 "floor1_ahu_fre_mflow": {
@@ -615,11 +612,6 @@
 "floor3_vav4_rehea_val_pos": {
 "path":"floor3.fivZonVAV.vAV[4].ReheaVal.y",
 "description":"reheat valve position of zone 4 served by AHU 3",
-"type":"output"
-},
-"floor3_vav5_rehea_val_pos": {
-"path":"floor3.fivZonVAV.vAV[5].ReheaVal.y",
-"description":"reheat valve position of zone 5 served by AHU 3",
 "type":"output"
 },
 "floor3_vav5_rehea_val_pos": {
