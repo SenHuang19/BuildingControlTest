@@ -1003,5 +1003,20 @@
 "path":"zonCon[15].oveAirFlowSetPoi.y",
 "description":"supply air flow rate setpoint of zone 5 served by AHU 23",
 "type":"output"
+},
+"floor1_pressure": {
+"path":"floor1.duaFanAirHanUnit.add.y",
+"description":"static pressure of AHU 1",
+"type":"output"
+},
+"floor2_pressure": {
+"path":"floor2.duaFanAirHanUnit.add.y",
+"description":"static pressure of AHU 2",
+"type":"output"
+},
+"floor3_pressure": {
+"path":"floor3.duaFanAirHanUnit.add.y",
+"description":"static pressure of AHU 3",
+"type":"output"
 }
 }
