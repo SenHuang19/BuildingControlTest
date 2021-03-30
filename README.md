@@ -94,7 +94,7 @@ Example configuration file:
 The duct static pressure reset is a trim and respond control strategy based on ASHRAE Guideline 36.  The application uses 
 the zone damper command and the ratio of zone air flow to air flow set point to generate zone air requests.  If the number
 of requests exceed the ignored_requests parameter then the duct static pressure set point is increased (updates at reset_frequency minutes).
-If the number of requests is less than or equal to the ignored_requests parameter then the  
+If the number of requests is less than or equal to the ignored_requests parameter then the duct static pressure set point is reduced.
 
 Example configuration file:
 
@@ -138,7 +138,8 @@ Example configuration file:
                 "damper_command": "floor1_vav5_damper_pos"
             }
         }
-Configuration parameters are as follows: 
+
+Modifiable configuration parameters are as follows: 
 
 | Parameter (data type)                                                 | Description                                               |
 |-----------------------------------------------------------------------|-----------------------------------------------------------|
@@ -153,7 +154,93 @@ Configuration parameters are as follows:
 | request1 (float)                                                      |  Generate an additional request if the zone air flow ratio exceeds this value |
 | request1 (float)                                                      |  Generate two additional requests if the zone air flow ratio exceeds this value |
 | ignored_requests (integer)                                            |  Number of zone requests to ignore (if requests less than equal, decrement set point)|
-| zone (#)                                                              |  key = code point name (do not modify), value = modelica point name (GET ``measurements``)|
+| zone# (dictionary)                                                    |  key = code point name (do not modify), value = modelica point name (GET ``measurements``)|
 
+## Discharge-air Temperature Reset
+The discharge-air temperature reset is a trim and respond control strategy based on ASHRAE Guideline 36.  The application uses 
+the zone damper command, zone reheat valve command, and the outdoor-air temperature as data inputs.  The zone damper command is used as a proxy for the 
+zone cooling PID signal.  If the damper command is above a threshold value, and the zone reheat valve is closed, the zone will generate a cooling requests.  If the
+zone reheat valve is open above a threshold value, the zone will generate heating requests.  The net cooling requests is the sum of all zones cooling requests and heating 
+requests. If the number of cooling requests exceed the ignored_requests parameter then the discharge-air temperature set point is decreased (updates at reset_frequency minutes).
+If the number of requests is less than or equal to the ignored_requests parameter then the  dicharge-air temperature set point is increased.  The maximum discharge-air temperature is
+also reset based on the outdoor-air temperature.  The following figure from the ASHRAE Guideline shows the relationship between the maximum discharge air temperature and the outdoor-air
+temperature.
 
+![img.png](figures/OAT_DAT.PNG)
+
+Example configuration file:
+
+        {
+            "class": "DatReset",
+            "control": "floor2_ahu_dis_temp_set_u",
+            "activate": "floor2_ahu_dis_temp_set_activate",
+            "name": "floor2",
+            "oat_low": 288.71,
+            "oat_high": 294.26,
+            "trim": 0.15,
+            "respond": 0.3,
+            "min_sp": 285.93,
+            "max_sp": 291.49,
+            "default_sp": 285.93,
+            "request1": 1.0,
+            "request2": 1.5,
+            "clg_request_thr": 0.9,
+            "htg_request_thr": 0.2,
+            "ignored_requests": 1,
+            "zone1": {
+                "temperature": "TZon[6]",
+                "cooling_setpoint": "floor2_vav1_cooling_set",
+                "heating_setpoint": "floor2_vav1_heating_set",
+                "cooling_signal": "floor2_vav1_damper_pos",
+                "heating_signal": "floor2_vav1_rehea_val_pos"
+            },
+            "zone2": {
+                "temperature": "TZon[7]",
+                "cooling_setpoint": "floor2_vav2_cooling_set",
+                "heating_setpoint": "floor2_vav2_heating_set",
+                "cooling_signal": "floor2_vav2_damper_pos",
+                "heating_signal": "floor2_vav2_rehea_val_pos"
+            },
+            "zone3": {
+                "temperature": "TZon[8]",
+                "cooling_setpoint": "floor2_vav3_cooling_set",
+                "heating_setpoint": "floor2_vav3_heating_set",
+                "cooling_signal": "floor2_vav3_damper_pos",
+                "heating_signal": "floor2_vav3_rehea_val_pos"
+            },
+            "zone4": {
+                "temperature": "TZon[9]",
+                "cooling_setpoint": "floor2_vav4_cooling_set",
+                "heating_setpoint": "floor2_vav4_heating_set",
+                "cooling_signal": "floor2_vav4_damper_pos",
+                "heating_signal": "floor2_vav4_rehea_val_pos"
+            },
+            "zone5": {
+                "temperature": "TZon[10]",
+                "cooling_setpoint": "floor2_vav5_cooling_set",
+                "heating_setpoint": "floor2_vav5_heating_set",
+                "cooling_signal": "floor2_vav5_damper_pos",
+                "heating_signal": "floor2_vav5_rehea_val_pos"
+            }
+        }
+
+Modifiable configuration parameters are as follows: 
+
+| Parameter (data type)                                                 | Description                                               |
+|-----------------------------------------------------------------------|-----------------------------------------------------------|
+| control (string)                                                      |  Modelica control point name (GET ``inputs``)             |
+| activate (string)                                                     |  Modelica activate point name (GET ``inputs``)            |
+| oat_low (float)                                                       |  The outdoor-air temperature corresponding to the maximum discharge-air temperature |
+| oat_high (integer)                                                    |  The outdoor-air temperature corresponding to the minimum discharge-air temperature |
+| trim (float)                                                          |  Amount to decrement the set point when zone are satisfied |
+| respond (integer)                                                     |  Amount to increase the set point when zones need more air |
+| min_sp (float)                                                        |  Minimum set point                                        |
+| max_sp (float)                                                        |  Maximum set point                                        |
+| default_sp (float)                                                    |  Nominal set point without reset                          |
+| clg_request_thr (float)                                               |  Generate a cooling request when the zone damper exceeds this value and zone reheat is off|
+| htg_request_thr (float)                                               |  Generate a heating request when the zone reheat valve exceeds this threshold|
+| request1 (float)                                                      |  Generate an additional request if the zone air flow ratio exceeds this value |
+| request1 (float)                                                      |  Generate two additional requests if the zone air flow ratio exceeds this value |
+| ignored_requests (integer)                                            |  Number of zone requests to ignore (if requests less than equal, decrement set point)|
+| zone# (dictionary)                                                    |  key = code point name (do not modify), value = modelica point name (GET ``measurements``)|
 
