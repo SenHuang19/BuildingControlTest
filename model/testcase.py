@@ -112,7 +112,7 @@ def path2modifer(keys,info,config):
 #          print temp                
     return modifier[:-2]
        
-def path2IO(keys,info,config):
+def path2IO(keys,info,config,scenario):
     '''Generating a Modelica model modifier
         
     Parameters
@@ -141,7 +141,10 @@ def path2IO(keys,info,config):
           fault_type = info[key]['type']
           args=path.split('.') 
           temp =''           
-          if fault_type.find('output')!=-1 : 
+          if fault_type.find('output')!=-1: 
+             if 'dependent' in info[key]:
+                 if not (info[key]['dependent'] in scenario):
+                        continue
              temp = config[fault_type]['arg'].format(keys[key]['name'],path)   
           elif fault_type.find('input')!=-1: 
              temp = config[fault_type]['arg'].format(keys[key]['name'],keys[key]['name'])  
@@ -184,7 +187,7 @@ class TestCase(object):
         with open('./inner1','w') as f: 
                 f.write(modifer) 
                     
-        IO = path2IO(self.ios,self.info,self.config)                    
+        IO = path2IO(self.ios,self.info,self.config,self.scenario)                    
         with open('./inner2','w') as f: 
                 f.write(IO)                 
                 
