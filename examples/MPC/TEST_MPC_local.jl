@@ -26,7 +26,7 @@ numzones = 5
 
 
 global CurrentMeasurements = Dict{String, Float64}()
-for Timestep in [1; 298:1:304] # Read the $Timestep row of csv file
+for Timestep in [1; 2:10] # 298:1:304] # Read the $Timestep row of csv file
     if Timestep == 1
         global u = MPC.initialize()
         global start_minute = df[!, Symbol("time")][Timestep]/60

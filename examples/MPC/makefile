@@ -5,7 +5,7 @@ COMMAND_RUN=docker run \
 	  --detach=false \
 	  --rm \
 	  -v `pwd`:/usr/myapp/ \
- 	  --network host \
+ 	  --net mynet \
 	  -i \
 	  -t \
 	  ${IMG_NAME} /bin/bash -c
