@@ -8,10 +8,10 @@ services:
     # logging:
       # driver: none
     ports:
-      - "127.0.0.1:5500:5500"
+      - "127.0.0.1:5500-5503:5500"
   jmodelica:
     build: '.'
     working_dir: /home/developer
     command: python web.py config
     ports:
-      - "127.0.0.1:5000:5000"
+      - "127.0.0.1:5000-5003:5000"
