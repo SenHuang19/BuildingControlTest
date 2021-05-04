@@ -1,4 +1,4 @@
-FROM michaelwetter/ubuntu-1804_jmodelica_trunk
+FROM senhuang/jmodelica_flask
 
 ENV ROOT_DIR /usr/local
 ENV JMODELICA_HOME $ROOT_DIR/JModelica
@@ -16,7 +16,6 @@ WORKDIR $HOME
 RUN mkdir fmu && \
     mkdir library
 
-RUN pip install --user flask-restful pandas
 
 COPY model/testcase.py $HOME/
 
