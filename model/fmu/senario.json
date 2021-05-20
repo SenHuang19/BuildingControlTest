@@ -294,42 +294,6 @@
 "description":"outdoor air damper position of AHU 1",
 "type":"output"
 },
-"floor1_ahu_fre_damper_pos_act": {
-"path":"floor1.duaFanAirHanUnit.mixingBox.mixBox.valFre.y_real",
-"description":"actual outdoor air damper position of AHU 1",
-"dependent":"floor1_outdoor_damper",
-"type":"output"
-},
-"floor2_ahu_fre_damper_pos_act": {
-"path":"floor2.duaFanAirHanUnit.mixingBox.mixBox.valFre.y_real",
-"description":"actual outdoor air damper position of AHU 2",
-"dependent":"floor2_outdoor_damper",
-"type":"output"
-},
-"floor3_ahu_fre_damper_pos_act": {
-"path":"floor3.duaFanAirHanUnit.mixingBox.mixBox.valFre.y_real",
-"description":"actual outdoor air damper position of AHU 3",
-"dependent":"floor3_outdoor_damper",
-"type":"output"
-},
-"floor1_ahu_coil_val_pos_act": {
-"path":"floor1.duaFanAirHanUnit.cooCoil.val.y_real",
-"description":"actual cooling valve position of AHU 1",
-"dependent":"floor1_coil_valve",
-"type":"output"
-},
-"floor2_ahu_coil_val_pos_act": {
-"path":"floor2.duaFanAirHanUnit.cooCoil.val.y_real",
-"description":"actual cooling valve position of AHU 2",
-"dependent":"floor2_coil_valve",
-"type":"output"
-},
-"floor3_ahu_coil_val_pos_act": {
-"path":"floor3.duaFanAirHanUnit.cooCoil.val.y_real",
-"description":"actual cooling valve position of AHU 3",
-"dependent":"floor3_coil_valve",
-"type":"output"
-},
 "floor2_ahu_fre_damper_pos": {
 "path":"floor2.duaFanAirHanUnit.mixingBox.mixBox.valFre.y",
 "description":"outdoor air damper position of AHU 2",
