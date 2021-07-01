@@ -53,6 +53,6 @@ COPY model/config $HOME/
 
 COPY model/fmu $HOME/fmu/
 
-COPY eplus $HOME/fmu/eplus/
+COPY eplus_fmu $HOME/fmu/eplus/
 
 COPY model/library $HOME/library/
