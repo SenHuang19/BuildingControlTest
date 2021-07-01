@@ -3,7 +3,6 @@
 This module defines the API to the test case used by the REST requests to 
 perform functions such as advancing the simulation, retreiving test case 
 information, and calculating and reporting results.
-
 """
 
 from pyfmi import load_fmu
@@ -17,13 +16,24 @@ from pymodelica import compile_fmu
 import ast
 import numpy as np
 
-
-
-
 templateLoader = jinja2.FileSystemLoader(searchpath='.')
-
 templateEnv = jinja2.Environment(loader=templateLoader)
 
+def cosim_data(u, dic):
+    y = {}  
+    for key in dic:
+        arry = dic[key]     
+        temp1 = 0      
+        for i in range(len(arry[0])):        
+            temp2 = 1     
+            for j in range(len(arry)):
+                   try:
+                               temp2 = temp2 * float(arry[j][i]) 
+                   except ValueError:
+                               temp2 = temp2 * float(u[arry[j][i]])                                              
+            temp1 = temp1 + temp2                              
+        y.update({key:temp1})       
+    return y   
 
 def _process_input(u, start_time):
     '''Convert the input dictionary into a structured array.
@@ -103,16 +113,20 @@ def path2modifer(keys,info,config):
           temp =''          
           if fault_type.find('output')==-1 and fault_type.find('input')==-1:            
              temp = config[fault_type]['string'].format(args[-1],keys[key]['value'],keys[key]['fault_time'])  
-          elif fault_type.find('input')!=-1:
+          elif fault_type.find('inputs')!=-1:
              temp = config[fault_type]['string'].format(args[-1],keys[key]['name'],keys[key]['name'])   
           if temp != '':             
               for i in range(len(args)-2,-1,-1):   
                   temp =  args[i]+'('+temp+')'
               modifier = modifier + temp +',\n' 
-#          print temp                
-    return modifier[:-2]
+#          print temp
+    if modifier == '':
+       modifier = ''
+    else:
+        modifier = ',\n' + modifier[:-2]          
+    return modifier
        
-def path2IO(keys,info,config,scenario):
+def path2IO(keys,info,config):
     '''Generating a Modelica model modifier
         
     Parameters
@@ -141,22 +155,19 @@ def path2IO(keys,info,config,scenario):
           fault_type = info[key]['type']
           args=path.split('.') 
           temp =''           
-          if fault_type.find('output')!=-1: 
-             if 'dependent' in info[key]:
-                 if not (info[key]['dependent'] in scenario):
-                        continue
+          if fault_type.find('output')!=-1 : 
              temp = config[fault_type]['arg'].format(keys[key]['name'],path)   
-          elif fault_type.find('input')!=-1: 
+          elif (fault_type.find('input')!=-1 and fault_type.find('inputs')==-1): 
              temp = config[fault_type]['arg'].format(keys[key]['name'],keys[key]['name'])  
+          elif fault_type.find('inputs')!=-1: 
+             temp = config[fault_type]['arg'].format(keys[key]['name'],keys[key]['num'],keys[key]['name'],keys[key]['num'])          
           if temp != '':              
                IO = IO + temp +'\n'        
     return IO    
-    
    
-    
 class TestCase(object):
-    '''Class that implements the test case.
-    
+    '''
+       Class that implements the test case.   
     '''
     
     def __init__(self,con):
@@ -180,6 +191,8 @@ class TestCase(object):
             for key in self.info:
                 if self.info[key]['type'] == 'output' or self.info[key]['type'] == 'input':
                     self.ios[key]={'name': key}
+                elif self.info[key]['type'] == 'inputs':
+                    self.ios[key]={'name': key,'num':self.info[key]['dimension']}
             self.scenario = self.ios                       
         self.model_class = self.con['model_class']            
         self.model_template = templateEnv.get_template(con['model_template'])        
@@ -187,7 +200,7 @@ class TestCase(object):
         with open('./inner1','w') as f: 
                 f.write(modifer) 
                     
-        IO = path2IO(self.ios,self.info,self.config,self.scenario)                    
+        IO = path2IO(self.ios,self.info,self.config)                    
         with open('./inner2','w') as f: 
                 f.write(IO)                 
                 
@@ -209,6 +222,20 @@ class TestCase(object):
         self.fmupath = '{}.fmu'.format(self.model_class)
         # Load fmu
         self.fmu = load_fmu(self.fmupath)
+        eplus_path = self.con['eplus'] 
+        self.eplus = load_fmu(eplus_path)       
+        self.eplus_inputs = self.eplus.get_model_variables(causality = 0)     
+        self.eplus_outputs = self.eplus.get_model_variables(causality = 1)
+        self.eplus_inputdict=self.con['outputs']
+        self.eplus_outputdict=self.con['inputs']        
+        self.init_time = eval(self.con['start_time'])       
+        self.start_time = self.init_time       
+        self.end_time = eval(self.con['end_time'])                
+        self.step = float(con['step'])
+        self.eplus.instantiate_slave('eplus_base')        
+        self.eplus.initialize(tStart=self.start_time,tStop=self.end_time) 
+        self.eplus.do_step(current_t=self.start_time, step_size=60)
+        self.eplus_currentt = self.start_time + 60        
         self.default_input_values = None
         if 'default_input' in con:
              self.default_input_values = con['default_input']
@@ -224,9 +251,8 @@ class TestCase(object):
         self.set_step(con['step'])
         # Set default fmu simulation options
         self.options = self.fmu.simulate_options()
-        self.options['CVode_options']['rtol'] = 1e-6 
+        self.options['CVode_options']['rtol'] = 1e-6
         # Set initial fmu simulation start
-        self.start_time = 0
         self.initialize_fmu = True
         self.options['initialize'] = self.initialize_fmu
         # Initialize simulation data arrays
@@ -358,6 +384,12 @@ class TestCase(object):
         # Check if possible to overwrite
         # if len(u) == 0:        
             # u = self.default_input_values
+        u_input = {}   
+        for key in self.eplus_outputs:       
+            u_input[key] = self.eplus.get(key)[0] 
+        u_eplus = cosim_data(u_input,self.eplus_outputdict)            
+        u.update(u_eplus)
+     
         input_object = _process_input(u, self.start_time)
         # Simulate
 #        print(input_object)
@@ -367,18 +399,26 @@ class TestCase(object):
         if res is not None:        
             # Get result and store measurement and control inputs
             self.__get_results(res)
+            
+            if (self.final_time - self.eplus_currentt)%60 == 0:
+                u_modelica = cosim_data(self.y,self.eplus_inputdict)
+                print u_modelica 
+                for key in u_modelica:                               
+                    self.eplus.set(key, u_modelica[key])                
+                for i in range(int((self.final_time - self.eplus_currentt)/60)):      
+                    self.eplus.do_step(current_t=self.eplus_currentt, step_size=60)            
+                    self.eplus_currentt = self.eplus_currentt + 60          
             # Advance start time
             self.start_time = self.final_time
             # Raise the flag to compute time lapse
-            self.tic_time = time.time()
-
+            self.tic_time = time.time()            
             return self.y
 
         else:
 
             return None        
 
-    def initialize(self, start_time, warmup_period):
+    def initialize(self, start_time, end_time):
         '''Initialize the test simulation.
         
         Parameters
@@ -406,9 +446,17 @@ class TestCase(object):
         # Do not allow negative starting time to avoid confusions
         if self.default_input_values is not None:
              input_object = _process_input(self.default_input_values,start_time)
-             res = self.__simulation(max(start_time-warmup_period,0), start_time, input_object = input_object)        
+             res = self.__simulation(start_time, end_time, input_object = input_object)        
         else:
-             res = self.__simulation(max(start_time-warmup_period,0), start_time)
+             res = self.__simulation(start_time, start_time)
+        # self.eplus.terminate()
+        # self.eplus.free_instance()
+        eplus_path = self.con['eplus'] 
+        self.eplus = load_fmu(eplus_path)
+        self.eplus.instantiate_slave('eplus_base')          
+        self.eplus.initialize(tStart=start_time,tStop=end_time) 
+        self.eplus.do_step(current_t=start_time, step_size=60)
+        self.eplus_currentt = start_time + 60
         # Process result
         if res is not None:
             # Get result

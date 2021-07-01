@@ -1,13 +1,7 @@
 version: '3.1'
 
 services:
-  eplus2:
-    build: './eplus'
-    working_dir: /home/developer/fmu
-    command: python web.py config jmodelica2
-    ports:
-      - "127.0.0.1:5501:5500"
-  jmodelica2:
+  emulator:
     build: '.'
     working_dir: /home/developer
     command: python web.py config

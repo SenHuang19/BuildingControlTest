@@ -3,12 +3,12 @@ import time
 import csv
 import os
 
-url = 'http://127.0.0.1:5500'
+url = 'http://127.0.0.1:5001'
 
 # Set simulation parameters
 length = 24*3600
 
-step = 600
+step = 60
 
 inputs = requests.get('{0}/inputs'.format(url)).json()
 
@@ -39,11 +39,11 @@ res = requests.put('{0}/step'.format(url), data={'step':step})
 
 y = requests.post('{0}/advance'.format(url), data={}).json()
 
-res = requests.put('{0}/reset'.format(url), data={'start_time':190*86400,'end_time':192*86400})
+res = requests.put('{0}/reset'.format(url), data={'start_time':190*86400,'end_time':191*86400})
 
 #y = requests.post('{0}/advance'.format(url), data={'TSet_u[1]':280.15,'TSet_activate[1]':1}).json()
 
-for i in range(144*2):
+for i in range(1440):
    
     y = requests.post('{0}/advance'.format(url), data={}).json()
     
