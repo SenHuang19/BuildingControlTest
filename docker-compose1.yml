@@ -4,7 +4,7 @@ services:
   eplus1:
     build: './eplus'
     working_dir: /home/developer/fmu
-    command: python web.py config jmodelica1
+    command: python web.py config_on jmodelica1
     ports:
       - "127.0.0.1:5500:5500"
   jmodelica1:
