@@ -16,6 +16,7 @@ model TwoWayEqualPercentage
   parameter Real R=50 "Rangeability, R=50...100 typically";
   parameter Real delta0=0.01
     "Range of significant deviation from equal percentage law";
+  Real y_real;
 
 initial equation
   // Since the flow model IBPSA.Fluid.BaseClasses.FlowModels.basicFlowFunction_m_flow computes
@@ -25,6 +26,8 @@ initial equation
                 + "  Rangeability R = " + String(R) + "\n"
                 + "  Leakage flow l = " + String(l) + "\n"
                 + "  Must have l < 1/R = " + String(1/R));
+equation
+  y_real = y_actual;
   annotation (
     defaultComponentName="val",
     Documentation(info="<html>

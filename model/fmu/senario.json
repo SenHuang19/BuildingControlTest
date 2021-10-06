@@ -274,33 +274,63 @@
 "description":"supply air mass flowrate in AHU 3",
 "type":"output"
 },
-"floor1_ahu_coil_val_pos": {
-"path":"floor1.duaFanAirHanUnit.cooCoil.val.y",
+"floor1_ahu_coil_val_pos_real": {
+"path":"floor1.duaFanAirHanUnit.cooCoil.val.y_real",
 "description":"cooling valve position of AHU 1",
+"type":"output"
+},
+"floor1_ahu_coil_val_pos": {
+"path":"floor1.duaFanAirHanUnit.cooCoil.val.y_actual",
+"description":"cooling valve position of AHU 1",
+"type":"output"
+},
+"floor2_ahu_coil_val_pos_real": {
+"path":"floor2.duaFanAirHanUnit.cooCoil.val.y_real",
+"description":"cooling valve position of AHU 2",
 "type":"output"
 },
 "floor2_ahu_coil_val_pos": {
-"path":"floor2.duaFanAirHanUnit.cooCoil.val.y",
-"description":"cooling valve position of AHU 1",
+"path":"floor2.duaFanAirHanUnit.cooCoil.val.y_actual",
+"description":"cooling valve position of AHU 2",
+"type":"output"
+},
+"floor3_ahu_coil_val_pos_real": {
+"path":"floor3.duaFanAirHanUnit.cooCoil.val.y_real",
+"description":"cooling valve position of AHU 3",
 "type":"output"
 },
 "floor3_ahu_coil_val_pos": {
-"path":"floor3.duaFanAirHanUnit.cooCoil.val.y",
-"description":"cooling valve position of AHU 1",
+"path":"floor3.duaFanAirHanUnit.cooCoil.val.y_actual",
+"description":"cooling valve position of AHU 3",
 "type":"output"
 },
-"floor1_ahu_fre_damper_pos": {
-"path":"floor1.duaFanAirHanUnit.mixingBox.mixBox.valFre.y",
+"floor1_ahu_fre_damper_pos_real": {
+"path":"floor1.duaFanAirHanUnit.mixingBox.mixBox.valFre.y_real",
 "description":"outdoor air damper position of AHU 1",
 "type":"output"
 },
-"floor2_ahu_fre_damper_pos": {
-"path":"floor2.duaFanAirHanUnit.mixingBox.mixBox.valFre.y",
+"floor1_ahu_fre_damper_pos": {
+"path":"floor1.duaFanAirHanUnit.mixingBox.mixBox.valFre.y_actual",
+"description":"outdoor air damper position of AHU 1",
+"type":"output"
+},
+"floor2_ahu_fre_damper_pos_real": {
+"path":"floor2.duaFanAirHanUnit.mixingBox.mixBox.valFre.y_real",
 "description":"outdoor air damper position of AHU 2",
 "type":"output"
 },
+"floor2_ahu_fre_damper_pos": {
+"path":"floor2.duaFanAirHanUnit.mixingBox.mixBox.valFre.y_actual",
+"description":"outdoor air damper position of AHU 2",
+"type":"output"
+},
+"floor3_ahu_fre_damper_pos_real": {
+"path":"floor3.duaFanAirHanUnit.mixingBox.mixBox.valFre.y_real",
+"description":"outdoor air damper position of AHU 3",
+"type":"output"
+},
 "floor3_ahu_fre_damper_pos": {
-"path":"floor3.duaFanAirHanUnit.mixingBox.mixBox.valFre.y",
+"path":"floor3.duaFanAirHanUnit.mixingBox.mixBox.valFre.y_actual",
 "description":"outdoor air damper position of AHU 3",
 "type":"output"
 },
@@ -809,9 +839,19 @@
 "description":"occupancy status signal",
 "type":"output"
 },
+"floor1_vav1_damper_pos_real": {
+"path":"floor1.fivZonVAV.vAV[1].Dam.y_real",
+"description":"damper position of zone 1 served by AHU 1",
+"type":"output"
+},
 "floor1_vav1_damper_pos": {
 "path":"floor1.fivZonVAV.vAV[1].Dam.y_actual",
 "description":"damper position of zone 1 served by AHU 1",
+"type":"output"
+},
+"floor1_vav2_damper_pos_real": {
+"path":"floor1.fivZonVAV.vAV[2].Dam.y_real",
+"description":"damper position of zone 2 served by AHU 1",
 "type":"output"
 },
 "floor1_vav2_damper_pos": {
@@ -819,9 +859,19 @@
 "description":"damper position of zone 2 served by AHU 1",
 "type":"output"
 },
+"floor1_vav3_damper_pos_real": {
+"path":"floor1.fivZonVAV.vAV[3].Dam.y_real",
+"description":"damper position of zone 3 served by AHU 1",
+"type":"output"
+},
 "floor1_vav3_damper_pos": {
 "path":"floor1.fivZonVAV.vAV[3].Dam.y_actual",
 "description":"damper position of zone 3 served by AHU 1",
+"type":"output"
+},
+"floor1_vav4_damper_pos_real": {
+"path":"floor1.fivZonVAV.vAV[4].Dam.y_real",
+"description":"damper position of zone 4 served by AHU 1",
 "type":"output"
 },
 "floor1_vav4_damper_pos": {
@@ -829,9 +879,19 @@
 "description":"damper position of zone 4 served by AHU 1",
 "type":"output"
 },
+"floor1_vav5_damper_pos_real": {
+"path":"floor1.fivZonVAV.vAV[5].Dam.y_real",
+"description":"damper position of zone 5 served by AHU 1",
+"type":"output"
+},
 "floor1_vav5_damper_pos": {
 "path":"floor1.fivZonVAV.vAV[5].Dam.y_actual",
 "description":"damper position of zone 5 served by AHU 1",
+"type":"output"
+},
+"floor2_vav1_damper_pos_real": {
+"path":"floor2.fivZonVAV.vAV[1].Dam.y_real",
+"description":"damper position of zone 1 served by AHU 2",
 "type":"output"
 },
 "floor2_vav1_damper_pos": {
@@ -839,9 +899,19 @@
 "description":"damper position of zone 1 served by AHU 2",
 "type":"output"
 },
+"floor2_vav2_damper_pos_real": {
+"path":"floor2.fivZonVAV.vAV[2].Dam.y_real",
+"description":"damper position of zone 2 served by AHU 2",
+"type":"output"
+},
 "floor2_vav2_damper_pos": {
 "path":"floor2.fivZonVAV.vAV[2].Dam.y_actual",
 "description":"damper position of zone 2 served by AHU 2",
+"type":"output"
+},
+"floor2_vav3_damper_pos_real": {
+"path":"floor2.fivZonVAV.vAV[3].Dam.y_real",
+"description":"damper position of zone 3 served by AHU 2",
 "type":"output"
 },
 "floor2_vav3_damper_pos": {
@@ -849,9 +919,19 @@
 "description":"damper position of zone 3 served by AHU 2",
 "type":"output"
 },
+"floor2_vav4_damper_pos_real": {
+"path":"floor2.fivZonVAV.vAV[4].Dam.y_real",
+"description":"damper position of zone 4 served by AHU 2",
+"type":"output"
+},
 "floor2_vav4_damper_pos": {
 "path":"floor2.fivZonVAV.vAV[4].Dam.y_actual",
 "description":"damper position of zone 4 served by AHU 2",
+"type":"output"
+},
+"floor2_vav5_damper_pos_real": {
+"path":"floor2.fivZonVAV.vAV[5].Dam.y_real",
+"description":"damper position of zone 5 served by AHU 2",
 "type":"output"
 },
 "floor2_vav5_damper_pos": {
@@ -859,9 +939,19 @@
 "description":"damper position of zone 5 served by AHU 2",
 "type":"output"
 },
+"floor3_vav1_damper_pos_real": {
+"path":"floor3.fivZonVAV.vAV[1].Dam.y_real",
+"description":"damper position of zone 1 served by AHU 3",
+"type":"output"
+},
 "floor3_vav1_damper_pos": {
 "path":"floor3.fivZonVAV.vAV[1].Dam.y_actual",
 "description":"damper position of zone 1 served by AHU 3",
+"type":"output"
+},
+"floor3_vav2_damper_pos_real": {
+"path":"floor3.fivZonVAV.vAV[2].Dam.y_real",
+"description":"damper position of zone 2 served by AHU 3",
 "type":"output"
 },
 "floor3_vav2_damper_pos": {
@@ -869,9 +959,19 @@
 "description":"damper position of zone 2 served by AHU 3",
 "type":"output"
 },
+"floor3_vav3_damper_pos_real": {
+"path":"floor3.fivZonVAV.vAV[3].Dam.y_real",
+"description":"damper position of zone 3 served by AHU 3",
+"type":"output"
+},
 "floor3_vav3_damper_pos": {
 "path":"floor3.fivZonVAV.vAV[3].Dam.y_actual",
 "description":"damper position of zone 3 served by AHU 3",
+"type":"output"
+},
+"floor3_vav4_damper_pos_real": {
+"path":"floor3.fivZonVAV.vAV[4].Dam.y_real",
+"description":"damper position of zone 4 served by AHU 3",
 "type":"output"
 },
 "floor3_vav4_damper_pos": {
@@ -879,24 +979,14 @@
 "description":"damper position of zone 4 served by AHU 3",
 "type":"output"
 },
-"floor3_vav5_damper_pos": {
-"path":"floor3.fivZonVAV.vAV[5].Dam.y_actual",
+"floor3_vav5_damper_pos_real": {
+"path":"floor3.fivZonVAV.vAV[5].Dam.y_real",
 "description":"damper position of zone 5 served by AHU 3",
 "type":"output"
 },
-"floor1_valve_pos": {
-"path":"floor1.duaFanAirHanUnit.cooCoil.val.y_actual",
-"description":"cooling coil position in AHU 1",
-"type":"output"
-},
-"floor2_valve_pos": {
-"path":"floor2.duaFanAirHanUnit.cooCoil.val.y_actual",
-"description":"cooling coil position in AHU 2",
-"type":"output"
-},
-"floor3_valve_pos": {
-"path":"floor3.duaFanAirHanUnit.cooCoil.val.y_actual",
-"description":"cooling coil position in AHU 3",
+"floor3_vav5_damper_pos": {
+"path":"floor3.fivZonVAV.vAV[5].Dam.y_actual",
+"description":"damper position of zone 5 served by AHU 3",
 "type":"output"
 },
 "floor1_fan_spe": {
