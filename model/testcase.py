@@ -3,7 +3,6 @@
 This module defines the API to the test case used by the REST requests to 
 perform functions such as advancing the simulation, retreiving test case 
 information, and calculating and reporting results.
-
 """
 
 from pyfmi import load_fmu
@@ -16,14 +15,10 @@ import jinja2
 from pymodelica import compile_fmu
 import ast
 import numpy as np
-
-
-
+from os.path import exists
 
 templateLoader = jinja2.FileSystemLoader(searchpath='.')
-
 templateEnv = jinja2.Environment(loader=templateLoader)
-
 
 def _process_input(u, start_time):
     '''Convert the input dictionary into a structured array.
@@ -112,7 +107,7 @@ def path2modifer(keys,info,config):
 #          print temp                
     return modifier[:-2]
        
-def path2IO(keys,info,config,scenario):
+def path2IO(keys,info,config):
     '''Generating a Modelica model modifier
         
     Parameters
@@ -141,22 +136,17 @@ def path2IO(keys,info,config,scenario):
           fault_type = info[key]['type']
           args=path.split('.') 
           temp =''           
-          if fault_type.find('output')!=-1: 
-             if 'dependent' in info[key]:
-                 if not (info[key]['dependent'] in scenario):
-                        continue
+          if fault_type.find('output')!=-1 : 
              temp = config[fault_type]['arg'].format(keys[key]['name'],path)   
           elif fault_type.find('input')!=-1: 
              temp = config[fault_type]['arg'].format(keys[key]['name'],keys[key]['name'])  
           if temp != '':              
                IO = IO + temp +'\n'        
     return IO    
-    
    
-    
 class TestCase(object):
-    '''Class that implements the test case.
-    
+    '''
+       Class that implements the test case.   
     '''
     
     def __init__(self,con):
@@ -187,7 +177,7 @@ class TestCase(object):
         with open('./inner1','w') as f: 
                 f.write(modifer) 
                     
-        IO = path2IO(self.ios,self.info,self.config,self.scenario)                    
+        IO = path2IO(self.ios,self.info,self.config)                    
         with open('./inner2','w') as f: 
                 f.write(IO)                 
                 
@@ -204,11 +194,13 @@ class TestCase(object):
                 target='me',
                 version='2.0',
                 jvm_args='-Xmx5g')
-                        
+             
         # Define simulation model
-        self.fmupath = '{}.fmu'.format(self.model_class)
+        self.fmu_path = '{}.fmu'.format(self.model_class)
+        while not exists(self.fmu_path):
+             time.sleep(1)  
         # Load fmu
-        self.fmu = load_fmu(self.fmupath)
+        self.fmu = load_fmu(self.fmu_path)
         self.default_input_values = None
         if 'default_input' in con:
              self.default_input_values = con['default_input']
@@ -224,7 +216,7 @@ class TestCase(object):
         self.set_step(con['step'])
         # Set default fmu simulation options
         self.options = self.fmu.simulate_options()
-        self.options['CVode_options']['rtol'] = 1e-6 
+        self.options['CVode_options']['rtol'] = 1e-6
         # Set initial fmu simulation start
         self.start_time = 0
         self.initialize_fmu = True
