@@ -104,12 +104,19 @@ def path2modifer(keys,info,config):
 #          print key
 #          print fault_type           
           if fault_type.find('output')==-1 and fault_type.find('input')==-1:
-#             print fault_type          
-             temp = config[fault_type]['string'].format(args[-1],keys[key]['value'],keys[key]['fault_time'])  
-             addition_output[key+'_realvalue'] = {}
-             addition_output[key+'_realvalue']['type'] ='output'
-             addition_output[key+'_realvalue']['description'] ='none'
-             addition_output[key+'_realvalue']['path'] = config[fault_type]['path'].format(path)              
+#             print fault_type
+             temp = config[fault_type]['string'].format(args[-1],keys[key]['value'],keys[key]['fault_time']) 
+             if fault_type.find('zone_sensor_fault')==-1:                          
+                addition_output[key+'_realvalue'] = {}
+                addition_output[key+'_realvalue']['type'] ='output'
+                addition_output[key+'_realvalue']['description'] ='none'
+                addition_output[key+'_realvalue']['path'] = config[fault_type]['path'].format(path)
+             else: 
+                for i in range(1,6):
+                    addition_output[key+'{}_realvalue'.format(i)] = {}
+                    addition_output[key+'{}_realvalue'.format(i)]['type'] ='output'
+                    addition_output[key+'{}_realvalue'.format(i)]['description'] ='none'
+                    addition_output[key+'{}_realvalue'.format(i)]['path'] = config[fault_type]['path'].format(path,i)                                      
           elif fault_type.find('input')!=-1:
              temp = config[fault_type]['string'].format(args[-1],keys[key]['name'],keys[key]['name'])   
           if temp != '':             
@@ -118,11 +125,11 @@ def path2modifer(keys,info,config):
               modifier = modifier + temp +',\n' 
 #          print temp
 
-    print "addition_output" 
-    print addition_output   
+    # print "addition_output" 
+    # print addition_output   
     info.update(addition_output)
-    print "new_info" 
-    print info    
+    # print "new_info" 
+    # print info    
     return modifier[:-2],info
        
 def path2IO(keys,info,config,scenario):
