@@ -92,25 +92,36 @@ def path2modifer(keys,info,config):
             
     '''   
     modifier = ''
+    addition_output = {}
     for key in keys.keys():
-#       print keys[key]
        if keys[key] is not None:
           if not isinstance(keys[key],dict):
                keys[key] = ast.literal_eval(keys[key])
           path = info[key]['path']   
           fault_type = info[key]['type']
           args=path.split('.')
-          temp =''          
-          if fault_type.find('output')==-1 and fault_type.find('input')==-1:            
+          temp =''
+#          print key
+#          print fault_type           
+          if fault_type.find('output')==-1 and fault_type.find('input')==-1:
+             print fault_type          
              temp = config[fault_type]['string'].format(args[-1],keys[key]['value'],keys[key]['fault_time'])  
+             addition_output[key+'_realvalue'] = {}
+             addition_output[key+'_realvalue']['type'] ='output'
+             addition_output[key+'_realvalue']['description'] ='none'
+             addition_output[key+'_realvalue']['path'] = config[fault_type]['path'].format(path)              
           elif fault_type.find('input')!=-1:
              temp = config[fault_type]['string'].format(args[-1],keys[key]['name'],keys[key]['name'])   
           if temp != '':             
               for i in range(len(args)-2,-1,-1):   
                   temp =  args[i]+'('+temp+')'
               modifier = modifier + temp +',\n' 
-#          print temp                
-    return modifier[:-2]
+#          print temp
+
+#    print "addition_output" 
+#    print addition_output   
+    info.update(addition_output)              
+    return modifier[:-2],info
        
 def path2IO(keys,info,config,scenario):
     '''Generating a Modelica model modifier
@@ -175,6 +186,8 @@ class TestCase(object):
                 
         if 'scenario' in con:
             self.scenario = self.con['scenario']
+            print "scenario" 
+            print self.scenario['floor1_ahu_dis']
         else:
             self.ios = {} 
             for key in self.info:
@@ -182,8 +195,9 @@ class TestCase(object):
                     self.ios[key]={'name': key}
             self.scenario = self.ios                       
         self.model_class = self.con['model_class']            
-        self.model_template = templateEnv.get_template(con['model_template'])        
-        modifer = path2modifer(self.scenario,self.info,self.config)        
+        self.model_template = templateEnv.get_template(con['model_template'])
+        modifer,self.info = path2modifer(self.scenario,self.info,self.config)
+        
         with open('./inner1','w') as f: 
                 f.write(modifer) 
                     
@@ -574,7 +588,8 @@ class TestCase(object):
         -------
         None
             
-        '''        
+        ''' 
+#        print scenario         
         self.con['scenario'] = scenario        
         self.__init__(self.con)
         return None          
