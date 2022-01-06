@@ -104,7 +104,7 @@ def path2modifer(keys,info,config):
 #          print key
 #          print fault_type           
           if fault_type.find('output')==-1 and fault_type.find('input')==-1:
-             print fault_type          
+#             print fault_type          
              temp = config[fault_type]['string'].format(args[-1],keys[key]['value'],keys[key]['fault_time'])  
              addition_output[key+'_realvalue'] = {}
              addition_output[key+'_realvalue']['type'] ='output'
@@ -118,9 +118,11 @@ def path2modifer(keys,info,config):
               modifier = modifier + temp +',\n' 
 #          print temp
 
-#    print "addition_output" 
-#    print addition_output   
-    info.update(addition_output)              
+    print "addition_output" 
+    print addition_output   
+    info.update(addition_output)
+    print "new_info" 
+    print info    
     return modifier[:-2],info
        
 def path2IO(keys,info,config,scenario):
@@ -183,7 +185,7 @@ class TestCase(object):
              data = f.read()         
         self.info = json.loads(data)       
    
-                
+        print con        
         if 'scenario' in con:
             self.scenario = self.con['scenario']
             print "scenario" 
@@ -196,12 +198,14 @@ class TestCase(object):
             self.scenario = self.ios                       
         self.model_class = self.con['model_class']            
         self.model_template = templateEnv.get_template(con['model_template'])
-        modifer,self.info = path2modifer(self.scenario,self.info,self.config)
-        
+        modifer,info = path2modifer(self.scenario,self.info,self.config)
+        for key in info:
+           if info[key]['type'] == 'output' or info[key]['type'] == 'input':
+                self.ios[key]={'name': key}
         with open('./inner1','w') as f: 
                 f.write(modifer) 
                     
-        IO = path2IO(self.ios,self.info,self.config,self.scenario)                    
+        IO = path2IO(self.ios,info,self.config,self.scenario)                    
         with open('./inner2','w') as f: 
                 f.write(IO)                 
                 
