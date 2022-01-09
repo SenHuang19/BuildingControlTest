@@ -93,6 +93,7 @@ def path2modifer(keys,info,config):
     '''   
     modifier = ''
     addition_output = {}
+    addition_input = ''
     for key in keys.keys():
        if keys[key] is not None:
           if not isinstance(keys[key],dict):
@@ -105,7 +106,8 @@ def path2modifer(keys,info,config):
 #          print fault_type           
           if fault_type.find('output')==-1 and fault_type.find('input')==-1:
 #             print fault_type
-             temp = config[fault_type]['string'].format(args[-1],keys[key]['value'],keys[key]['fault_time']) 
+             temp = config[fault_type]['string'].format(args[-1],keys[key]['variable'])
+             addition_input = addition_input+config[fault_type]['arg'].format(keys[key]['variable'])+'\n'              
              if fault_type.find('zone_sensor_fault')==-1:                          
                 addition_output[key+'_realvalue'] = {}
                 addition_output[key+'_realvalue']['type'] ='output'
@@ -123,14 +125,9 @@ def path2modifer(keys,info,config):
               for i in range(len(args)-2,-1,-1):   
                   temp =  args[i]+'('+temp+')'
               modifier = modifier + temp +',\n' 
-#          print temp
-
-    # print "addition_output" 
-    # print addition_output   
-    info.update(addition_output)
-    # print "new_info" 
-    # print info    
-    return modifier[:-2],info
+  
+    info.update(addition_output)  
+    return modifier[:-2],info,addition_input
        
 def path2IO(keys,info,config,scenario):
     '''Generating a Modelica model modifier
@@ -166,8 +163,10 @@ def path2IO(keys,info,config,scenario):
                  if not (info[key]['dependent'] in scenario):
                         continue
              temp = config[fault_type]['arg'].format(keys[key]['name'],path)   
-          elif fault_type.find('input')!=-1: 
-             temp = config[fault_type]['arg'].format(keys[key]['name'],keys[key]['name'])  
+          else:
+             number = config[fault_type]['arg'].count('{}')
+             inputs = [keys[key]['name']] * number
+             temp = config[fault_type]['arg'].format(*inputs)  
           if temp != '':              
                IO = IO + temp +'\n'        
     return IO    
@@ -195,8 +194,6 @@ class TestCase(object):
         print con        
         if 'scenario' in con:
             self.scenario = self.con['scenario']
-            print "scenario" 
-            print self.scenario['floor1_ahu_dis']
         else:
             self.ios = {} 
             for key in self.info:
@@ -205,14 +202,15 @@ class TestCase(object):
             self.scenario = self.ios                       
         self.model_class = self.con['model_class']            
         self.model_template = templateEnv.get_template(con['model_template'])
-        modifer,info = path2modifer(self.scenario,self.info,self.config)
+        modifer,info,addition_input = path2modifer(self.scenario,self.info,self.config)
         for key in info:
            if info[key]['type'] == 'output' or info[key]['type'] == 'input':
                 self.ios[key]={'name': key}
         with open('./inner1','w') as f: 
                 f.write(modifer) 
                     
-        IO = path2IO(self.ios,info,self.config,self.scenario)                    
+        IO = path2IO(self.ios,info,self.config,self.scenario)
+        IO= addition_input + IO        
         with open('./inner2','w') as f: 
                 f.write(IO)                 
                 

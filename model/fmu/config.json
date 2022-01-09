@@ -1,16 +1,31 @@
-{"zone_sensor_fault":{
-"string":"{}(dt={}, FauTime={})"
+{"floor1_zone_sensor_fault":{
+"string":"redeclare BuildingControlEmulator.Subsystems.HydDisturbution.FivZonVAV_fault {}(dt={})",
+"arg":"Modelica.Blocks.Interfaces.RealInput {}[5];",
+"path":"{}.T_real[{}]"
+},
+"floor2_zone_sensor_fault":{
+"string":"redeclare BuildingControlEmulator.Subsystems.HydDisturbution.FivZonVAV_fault {}(dt={})",
+"arg":"Modelica.Blocks.Interfaces.RealInput {};",
+"path":"{}.T_real[{}]"
+},
+"floor3_zone_sensor_fault":{
+"string":"redeclare BuildingControlEmulator.Subsystems.HydDisturbution.FivZonVAV_fault {}(dt={})",
+"arg":"Modelica.Blocks.Interfaces.RealInput {};",
+"path":"{}.T_real[{}]"
 },
 "temp_sensor_fault":{
-"string":"redeclare BuildingControlEmulator.Devices.Fault.TemSensorDev {}(dt={}, FauTime={})",
+"string":"redeclare BuildingControlEmulator.Devices.Fault.TemSensorDev {}(dt={})",
+"arg":"Modelica.Blocks.Interfaces.RealInput {};",
 "path":"{}.T_real"
 },
 "pressure_sensor_fault":{
-"string":"redeclare BuildingControlEmulator.Devices.Fault.PreSensorDev {}(dp={}, FauTime={})",
+"string":"redeclare BuildingControlEmulator.Devices.Fault.PreSensorDev {}(dp={})",
+"arg":"Modelica.Blocks.Interfaces.RealInput {};",
 "path":"{}.p_real"
 },
 "valve_fault":{
-"string":"redeclare BuildingControlEmulator.Devices.Fault.TwoWayLeak {}(y_leak={},FauTime={})",
+"string":"redeclare BuildingControlEmulator.Devices.Fault.TwoWayLeak {}(y_leak={})",
+"arg":"Modelica.Blocks.Interfaces.RealInput {};",
 "path":"{}.y_real"
 },
 "output":{
