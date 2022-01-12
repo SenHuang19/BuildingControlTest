@@ -1,32 +1,34 @@
 import requests
 
-url = 'http://127.0.0.1:5000'
+url = 'http://127.0.0.1:5001'
 
 
 ####################### setting the fault scenario ###############################################
 
-fault_scenario = requests.get('{0}/fault_scenario'.format(url)).json()
+#fault_scenario = requests.get('{0}/fault_scenario'.format(url)).json()
 
-default = fault_scenario
+#default = fault_scenario
 
 default = {}
 
-default['floor1_ahu_dis'] = {'value':2,'fault_time':0}
-
-# # r ={'floor3_pre':{'value':1,'fault_time':0},
-    # # 'floor2_pre':{'value':1,'fault_time':0},
-    # # 'floor3_ahu_dis_T':{'name':'floor3_ahu_dis_T'},
-    # # 'floor3_ahu_dis_pre_set':{'name':'floor3_ahu_dis_pre_set'}}
-     
-     # # ############ note that "fault_time" should be positive  ############################     
-     
+default['floor1_ahu_dis'] = {'variable':'floor1_ahu_dis_input'}
+ 
 res = requests.put('{0}/fault_scenario'.format(url), json=default)
+
+print(res)
 
 fault_scenario = requests.get('{0}/fault_scenario'.format(url)).json()
 
 #inputs = requests.get('{0}/inputs'.format(url)).json()
 
-print(fault_scenario['floor1_ahu_dis'])
+#print(fault_scenario['floor1_ahu_dis'])
+inputs = requests.get('{0}/inputs'.format(url)).json()
+
+print(inputs)
+
+measurements = requests.get('{0}/measurements'.format(url)).json()
+
+print(measurements)
 
 ####################### setting the simulation ###############################################
 
