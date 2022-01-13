@@ -7,9 +7,12 @@ The API is implemented using the ``flask`` package.
 
 # GENERAL PACKAGE IMPORT
 # ----------------------
+from __future__ import print_function
 from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
 import json
+import sys
+
 # ----------------------
 
 # -----------------------
@@ -28,7 +31,7 @@ class Advance(Resource):
         POST request with input data to advance the simulation one step 
         and receive current measurements.
         """
-        u = self.parser_advance.parse_args()
+        u = request.get_json(force=True)
         y = self.case.advance(u)
         return y
 
@@ -103,7 +106,7 @@ class Scenario(Resource):
     def put(self):
         """PUT request to set simulation step in seconds."""
         args = self.parser_fault_scenario.parse_args()
-        print args
+#        print args
         self.case.set_scenario(args)
         return None  
 
@@ -193,7 +196,7 @@ def main(config):
     api.add_resource(Scenario, '/fault_scenario', resource_class_kwargs = {"case": case, "parser_fault_scenario": parser_fault_scenario})
     # --------------------------------------
 
-    app.run(debug=False, host='0.0.0.0')        
+    app.run(debug=True, host='0.0.0.0')        
 
     # --------------------------------------
 
