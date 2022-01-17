@@ -58,7 +58,7 @@ def _process_input(u, start_time):
             u_list = []
             u_trajectory = start_time
             for key in u.keys():
-                if key != 'time' and u[key]:
+                if key != 'time' and u[key] is not None:
                     value = float(u[key])
                     u_list.append(key)
                     u_trajectory = np.vstack((u_trajectory, value))
@@ -383,9 +383,10 @@ class TestCase(object):
         # Check if possible to overwrite
         # if len(u) == 0:        
             # u = self.default_input_values
+        print(u)
         input_object = _process_input(u, self.start_time)
         # Simulate
-#        print(input_object)
+        print(input_object)
         res = self.__simulation(self.start_time,self.final_time,input_object) 
 
         # Process results
