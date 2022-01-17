@@ -191,11 +191,11 @@ class TestCase(object):
              data = f.read()         
         self.info = json.loads(data)       
    
-        print con        
+        self.ios = {}         
         if 'scenario' in con:
             self.scenario = self.con['scenario']
         else:
-            self.ios = {} 
+            
             for key in self.info:
                 if self.info[key]['type'] == 'output' or self.info[key]['type'] == 'input':
                     self.ios[key]={'name': key}
