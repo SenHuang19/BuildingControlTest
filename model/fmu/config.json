@@ -5,12 +5,12 @@
 },
 "floor2_zone_sensor_fault":{
 "string":"redeclare BuildingControlEmulator.Subsystems.HydDisturbution.FivZonVAV_fault {}(dt={})",
-"arg":"Modelica.Blocks.Interfaces.RealInput {};",
+"arg":"Modelica.Blocks.Interfaces.RealInput {}[5];",
 "path":"{}.T_real[{}]"
 },
 "floor3_zone_sensor_fault":{
 "string":"redeclare BuildingControlEmulator.Subsystems.HydDisturbution.FivZonVAV_fault {}(dt={})",
-"arg":"Modelica.Blocks.Interfaces.RealInput {};",
+"arg":"Modelica.Blocks.Interfaces.RealInput {}[5];",
 "path":"{}.T_real[{}]"
 },
 "temp_sensor_fault":{
