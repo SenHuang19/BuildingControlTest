@@ -23,8 +23,13 @@
 "arg":"Modelica.Blocks.Interfaces.RealInput {};",
 "path":"{}.p_real"
 },
-"valve_fault":{
+"valve_lea_fault":{
 "string":"redeclare BuildingControlEmulator.Devices.Fault.TwoWayLeak {}(y_leak={})",
+"arg":"Modelica.Blocks.Interfaces.RealInput {};",
+"path":"{}.y_real"
+},
+"valve_stu_fault":{
+"string":"redeclare BuildingControlEmulator.Devices.Fault.TwoWayStuck {}(y_stuck={})",
 "arg":"Modelica.Blocks.Interfaces.RealInput {};",
 "path":"{}.y_real"
 },

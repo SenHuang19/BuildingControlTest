@@ -112,32 +112,47 @@
 "floor1_outdoor_damper":{
 "path":"floor1.duaFanAirHanUnit.mixingBox.mixBox.valFre",
 "description":"outdoor air damper in AHU1",
-"type":"valve_fault"
+"type":"valve_lea_fault"
 },
 "floor2_outdoor_damper":{
 "path":"floor2.duaFanAirHanUnit.mixingBox.mixBox.valFre",
 "description":"outdoor air damper in AHU2",
-"type":"valve_fault"
+"type":"valve_lea_fault"
 },
 "floor3_outdoor_damper":{
 "path":"floor3.duaFanAirHanUnit.mixingBox.mixBox.valFre",
 "description":"outdoor air damper in AHU3",
-"type":"valve_fault"
+"type":"valve_lea_fault"
+}, 
+"floor1_outdoor_damper_stuck":{
+"path":"floor1.duaFanAirHanUnit.mixingBox.mixBox.valFre",
+"description":"outdoor air damper in AHU1",
+"type":"valve_stu_fault"
+},
+"floor2_outdoor_damper_stuck":{
+"path":"floor2.duaFanAirHanUnit.mixingBox.mixBox.valFre",
+"description":"outdoor air damper in AHU2",
+"type":"valve_stu_fault"
+},
+"floor3_outdoor_damper_stuck":{
+"path":"floor3.duaFanAirHanUnit.mixingBox.mixBox.valFre",
+"description":"outdoor air damper in AHU3",
+"type":"valve_stu_fault"
 }, 
 "floor1_coil_valve":{
 "path":"floor1.duaFanAirHanUnit.cooCoil.val",
 "description":"coil valve in AHU1",
-"type":"valve_fault"
+"type":"valve_lea_fault"
 },
 "floor2_coil_valve":{
 "path":"floor2.duaFanAirHanUnit.cooCoil.val",
 "description":"coil valve in AHU2",
-"type":"valve_fault"
+"type":"valve_lea_fault"
 },
 "floor3_coil_valve":{
 "path":"floor3.duaFanAirHanUnit.cooCoil.val",
 "description":"coil valve in AHU3",
-"type":"valve_fault"
+"type":"valve_lea_fault"
 },
 "floor1_ahu_dis_pre_set": {
 "path":"floor1.duaFanAirHanUnit.supFan.variableSpeed.ovePreSetPoi",
