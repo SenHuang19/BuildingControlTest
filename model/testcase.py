@@ -191,15 +191,15 @@ class TestCase(object):
              data = f.read()         
         self.info = json.loads(data)       
    
-        self.ios = {}         
+        self.ios = {}  
+        for key in self.info:
+                if self.info[key]['type'] == 'output' or self.info[key]['type'] == 'input':
+                    self.ios[key]={'name': key}        
         if 'scenario' in con:
             self.scenario = self.con['scenario']
+            self.scenario.update(self.ios) 
         else:
-            
-            for key in self.info:
-                if self.info[key]['type'] == 'output' or self.info[key]['type'] == 'input':
-                    self.ios[key]={'name': key}
-            self.scenario = self.ios                       
+            self.scenario =  self.ios                    
         self.model_class = self.con['model_class']            
         self.model_template = templateEnv.get_template(con['model_template'])
         modifer,info,addition_input = path2modifer(self.scenario,self.info,self.config)
