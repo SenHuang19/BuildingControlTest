@@ -23,14 +23,17 @@ default['floor1_ahu_dis'] = {'variable':'floor1_ahu_dis_input'}
 res = requests.put('{0}/fault_scenario'.format(url_modelica), json=default)
 
 inputs = requests.get('{0}/inputs'.format(url_eplus)).json()
-print(inputs)
 
 y = requests.post('{0}/advance'.format(url_eplus), data=json.dumps({})).json()
 
-requests.put('{url_eplus}/reset', data={'start_time':start_sec, 'end_time':end_sec})
+requests.put('{}/reset'.format(url_eplus), data={'start_time':start_sec, 'end_time':end_sec})
 
+print(y['floor1_dis_T_set'])
 print(y['floor1_pressure_set'])
+print(y['floor1_mix_T_set'])
 
-y = requests.post('{0}/advance'.format(url_eplus), data=json.dumps({'floor1_ahu_dis_pre_set':372.95,'floor1_ahu_dis_pre_set_activate':1})).json()
+y = requests.post('{0}/advance'.format(url_eplus), data=json.dumps({'floor1_ahu_dis_temp_set_u':287.0367,'floor1_ahu_dis_temp_set_activate':1,'floor1_ahu_mix_temp_set_u':289.5483,'floor1_ahu_mix_temp_set_activate':1,'floor1_ahu_dis_pre_set_u':433.31,'floor1_ahu_dis_pre_set_activate':1})).json()
 
+print(y['floor1_dis_T_set'])
 print(y['floor1_pressure_set'])
+print(y['floor1_mix_T_set'])
