@@ -23,12 +23,14 @@ default['floor1_ahu_dis'] = {'variable':'floor1_ahu_dis_input'}
 res = requests.put('{0}/fault_scenario'.format(url_modelica), json=default)
 
 inputs = requests.get('{0}/inputs'.format(url_eplus)).json()
+print(inputs)
 
 y = requests.post('{0}/advance'.format(url_eplus), data=json.dumps({})).json()
 
-requests.put('{}/step'.format(url_eplus), data={'start_time':start_sec, 'end_time':end_sec})
+requests.put('{url_eplus}/reset', data={'start_time':start_sec, 'end_time':end_sec})
 
-y = requests.post('{0}/advance'.format(url_eplus), data=json.dumps({'floor1_ahu_dis_input':1})).json()
+print(y['floor1_pressure_set'])
 
-print(y['floor1_ahu_dis_realvalue'])
-print(y['floor1_ahu_dis_T'])
+y = requests.post('{0}/advance'.format(url_eplus), data=json.dumps({'floor1_ahu_dis_pre_set':372.95,'floor1_ahu_dis_pre_set_activate':1})).json()
+
+print(y['floor1_pressure_set'])
