@@ -4,11 +4,11 @@ import json
 start_day = 33
 run_period = 86400
 
-url_eplus    = f'http://127.0.0.1:5501'
-url_modelica = f'http://127.0.0.1:5001'
+url_eplus    = 'http://127.0.0.1:5500'
+url_modelica = 'http://127.0.0.1:5000'
 
 # Set the step
-requests.put(f'{url_eplus}/step', data={'step': 60})
+requests.put('{}/step'.format(url_eplus), data={'step': 60})
 
 # Set the simulation start and end times in units of seconds
 start_sec = start_day*86400
@@ -26,7 +26,7 @@ inputs = requests.get('{0}/inputs'.format(url_eplus)).json()
 
 y = requests.post('{0}/advance'.format(url_eplus), data=json.dumps({})).json()
 
-requests.put(f'{url_eplus}/reset', data={'start_time':start_sec, 'end_time':end_sec})
+requests.put('{}/step'.format(url_eplus), data={'start_time':start_sec, 'end_time':end_sec})
 
 y = requests.post('{0}/advance'.format(url_eplus), data=json.dumps({'floor1_ahu_dis_input':1})).json()
 
