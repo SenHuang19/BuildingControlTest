@@ -16,7 +16,7 @@ model HexElementLatent "Element of a heat exchanger with humidity condensation o
   MassExchange masExc(
      redeclare final package Medium=Medium2) "Model for mass exchange"
     annotation (Placement(transformation(extent={{50,-40},{70,-20}})));
-protected
+
   constant Boolean simplify_mWat_flow = true
     "Set to true to cause port_a.m_flow + port_b.m_flow = 0 even if mWat_flow is non-zero. Used only if Medium.nX > 1";
   Modelica.Thermal.HeatTransfer.Sensors.TemperatureSensor temSen(
@@ -36,7 +36,7 @@ protected
   Buildings.HeatTransfer.Sources.PrescribedHeatFlow heaConVapCoi
     "Heat conductor for latent heat flow rate, accounting for latent heat deposited with vapor on the coil"
     annotation (Placement(transformation(extent={{0,10},{-20,30}})));
-  Modelica.Blocks.Math.Gain gain(final k=-1)
+  Modelica.Blocks.Math.Gain gain(final k=0)
     annotation (Placement(transformation(extent={{30,10},{10,30}})));
 equation
   connect(temSen.T, masExc.TSur) annotation (Line(points={{-40,0},{20,0},{20,
